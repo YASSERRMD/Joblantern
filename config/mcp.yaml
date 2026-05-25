@@ -55,6 +55,13 @@ servers:
     call_timeout: 30s
     max_retries: 1
 
+  - name: joblantern.pattern
+    enabled: true
+    transport: stdio
+    command: mcp-pattern
+    call_timeout: 5s
+    max_retries: 0
+
   - name: joblantern.scamdb
     enabled: true
     transport: stdio

@@ -70,3 +70,9 @@ Thumbs.db
 # --- Test artifacts ---
 /testdata/tmp/
 /internal/db/testdata/*.db
+
+# --- Stray go-build binaries dropped at the repo root ---
+# Use `make build` or `go build -o bin/...` so output goes under /bin/.
+/joblantern
+/goose-migrate
+/mcp-*

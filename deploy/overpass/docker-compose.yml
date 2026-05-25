@@ -1,0 +1,19 @@
+name: joblantern-overpass
+
+services:
+  overpass:
+    image: wiktorn/overpass-api:latest
+    container_name: joblantern-overpass
+    restart: unless-stopped
+    environment:
+      OVERPASS_META: "yes"
+      OVERPASS_MODE: "init"
+      OVERPASS_PLANET_URL: ${OVERPASS_PLANET_URL:-https://download.geofabrik.de/europe/monaco-latest.osm.bz2}
+      OVERPASS_DIFF_URL: ${OVERPASS_DIFF_URL:-https://download.geofabrik.de/europe/monaco-updates/}
+    ports:
+      - "8089:80"
+    volumes:
+      - overpass-db:/db
+
+volumes:
+  overpass-db:

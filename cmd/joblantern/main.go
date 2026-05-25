@@ -53,8 +53,20 @@ func run(addr string, logger *slog.Logger) error {
 	r.Use(chimiddleware.RequestID)
 	r.Use(chimiddleware.Recoverer)
 	r.Use(chimiddleware.RealIP)
+	r.Use(web.SecurityHeaders)
 	metrics := web.NewMetrics()
 	r.Use(metrics.Middleware)
+
+	limit := web.NewIPRateLimiter(20, time.Minute)
+	r.Use(func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.URL.Path == "/verify" || r.URL.Path == "/api/v1/verify" {
+				limit.Middleware(next).ServeHTTP(w, r)
+				return
+			}
+			next.ServeHTTP(w, r)
+		})
+	})
 
 	r.Get("/healthz", func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "text/plain; charset=utf-8")

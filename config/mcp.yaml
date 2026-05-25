@@ -23,3 +23,13 @@ servers:
     command: mcp-hello
     call_timeout: 10s
     max_retries: 1
+
+  - name: joblantern.address
+    enabled: true
+    transport: stdio
+    command: mcp-address
+    env:
+      NOMINATIM_URL: http://localhost:8088
+      OVERPASS_URL: http://localhost:8089/api/interpreter
+    call_timeout: 30s
+    max_retries: 2

@@ -40,3 +40,10 @@ servers:
     command: mcp-streetview
     call_timeout: 30s
     max_retries: 1
+
+  - name: joblantern.registry
+    enabled: true
+    transport: stdio
+    command: mcp-registry
+    call_timeout: 30s
+    max_retries: 2

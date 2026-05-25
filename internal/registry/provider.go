@@ -12,21 +12,21 @@ import (
 
 // Common errors returned by Provider implementations.
 var (
-	ErrNotFound      = errors.New("registry: company not found")
-	ErrRateLimited   = errors.New("registry: rate limited")
-	ErrTokenInvalid  = errors.New("registry: token invalid")
-	ErrJurisdiction  = errors.New("registry: jurisdiction unknown")
+	ErrNotFound       = errors.New("registry: company not found")
+	ErrRateLimited    = errors.New("registry: rate limited")
+	ErrTokenInvalid   = errors.New("registry: token invalid")
+	ErrJurisdiction   = errors.New("registry: jurisdiction unknown")
 	ErrNotImplemented = errors.New("registry: not implemented")
 )
 
 // Match is a search hit.
 type Match struct {
-	ID               string    `json:"id"`
-	Name             string    `json:"name"`
-	Jurisdiction     string    `json:"jurisdiction,omitempty"`
-	Status           string    `json:"status,omitempty"`
+	ID                string    `json:"id"`
+	Name              string    `json:"name"`
+	Jurisdiction      string    `json:"jurisdiction,omitempty"`
+	Status            string    `json:"status,omitempty"`
 	IncorporationDate time.Time `json:"incorporation_date,omitempty"`
-	RegistryURL      string    `json:"registry_url,omitempty"`
+	RegistryURL       string    `json:"registry_url,omitempty"`
 }
 
 // Company is the full record for a single company.

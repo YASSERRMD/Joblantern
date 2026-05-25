@@ -75,6 +75,19 @@ services:
     ports:
       - "8083:8083"
 
+  mcp-registry:
+    build:
+      context: ..
+      dockerfile: cmd/mcp-registry/Dockerfile
+    image: joblantern/mcp-registry:dev
+    container_name: joblantern-mcp-registry
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8084"]
+    environment:
+      OPENCORPORATES_TOKEN: ${OPENCORPORATES_TOKEN:-}
+    ports:
+      - "8084:8084"
+
 volumes:
   pgdata:
     name: joblantern-pgdata

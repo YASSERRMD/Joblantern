@@ -1,0 +1,49 @@
+# syntax=docker/dockerfile:1.7
+#
+# Joblantern — development Dockerfile for the main joblantern binary.
+# Multi-stage: build with golang, ship on distroless nonroot.
+# Licenses: golang (BSD-3-Clause), distroless (Apache 2.0).
+
+# ---------- Build stage ----------
+FROM golang:1.23-alpine AS build
+
+WORKDIR /src
+
+# Cache go.mod/go.sum first for faster rebuilds.
+COPY go.mod go.sum* ./
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    go mod download
+
+# Copy the rest of the source tree.
+COPY . .
+
+# CGO_ENABLED=0 for a fully static binary that runs on distroless.
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH:-amd64} \
+    go build -trimpath -ldflags="-s -w" \
+    -o /out/joblantern ./cmd/joblantern
+
+# ---------- Runtime stage ----------
+FROM gcr.io/distroless/static-debian12:nonroot AS runtime
+
+LABEL org.opencontainers.image.title="joblantern"
+LABEL org.opencontainers.image.source="https://github.com/yasserrmd/joblantern"
+LABEL org.opencontainers.image.licenses="Apache-2.0"
+LABEL org.opencontainers.image.description="Joblantern: GIS-driven agentic AI for job-listing verification."
+
+USER nonroot:nonroot
+WORKDIR /app
+
+COPY --from=build /out/joblantern /app/joblantern
+
+ENV JOBLANTERN_ADDR=:8080
+EXPOSE 8080
+
+# Distroless has no shell, so HEALTHCHECK runs the binary itself with a flag.
+# `healthz` is wired in Phase 01 main.go.
+HEALTHCHECK --interval=15s --timeout=3s --start-period=5s --retries=3 \
+    CMD ["/app/joblantern", "-healthcheck"]
+
+ENTRYPOINT ["/app/joblantern"]

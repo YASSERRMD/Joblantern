@@ -1,0 +1,62 @@
+# Joblantern recruitment-scam pattern rules.
+#
+# Each rule is a deterministic regex (case-insensitive) that, when it
+# matches a listing's text, contributes a weighted red flag.
+#
+# Schema:
+#   rules:
+#     - code:        stable id
+#       description: one-line plain-English explanation
+#       weight:      [0,1] severity contribution
+#       patterns:    list of Go-regex strings ((?i) is added automatically)
+
+rules:
+  - code: upfront_fee
+    description: Asks the job seeker to pay an upfront fee, deposit, or "processing" charge.
+    weight: 0.9
+    patterns:
+      - "(visa|registration|processing|application|placement|training)\\s+fee"
+      - "pay\\s+(usd|aed|sar|inr|bdt|php|pkr)?\\s?\\d+"
+      - "refundable deposit"
+
+  - code: extraordinary_pay
+    description: Pay grossly disproportionate to the role's typical compensation.
+    weight: 0.7
+    patterns:
+      - "(\\$|usd|aed|sar)\\s?\\d{4,}\\s*(per|/)\\s*(day|week)"
+      - "earn\\s+(\\$|usd)?\\s?\\d{3,}\\s*(daily|per day)"
+
+  - code: no_experience_needed
+    description: "\"No experience needed\" combined with high pay or fast hiring."
+    weight: 0.4
+    patterns:
+      - "no experience (needed|required|necessary)"
+
+  - code: urgency
+    description: Strong urgency language pushing the seeker to act before verifying.
+    weight: 0.5
+    patterns:
+      - "immediate (start|hiring|joining)"
+      - "today only"
+      - "limited (seats|slots)"
+
+  - code: untraceable_contact
+    description: Only personal email + WhatsApp; no corporate identity.
+    weight: 0.6
+    patterns:
+      - "whatsapp[^\\n]{0,40}\\+\\d"
+      - "(gmail|hotmail|yahoo|outlook)\\.com"
+
+  - code: identity_documents_upfront
+    description: Demands passport/ID scans before any interview.
+    weight: 0.8
+    patterns:
+      - "send.*passport (copy|scan)"
+      - "(your|send) (id|emirates id|cnic|aadhaar) (copy|scan)"
+
+  - code: fake_government_endorsement
+    description: Claims a government or regulator endorses or guarantees the role.
+    weight: 0.7
+    patterns:
+      - "government[- ]?(approved|guaranteed)"
+      - "ministry of (labour|labor) (approved|registered)"

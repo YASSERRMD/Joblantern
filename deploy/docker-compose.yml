@@ -99,6 +99,17 @@ services:
     ports:
       - "8085:8085"
 
+  mcp-pattern:
+    build:
+      context: ..
+      dockerfile: cmd/mcp-pattern/Dockerfile
+    image: joblantern/mcp-pattern:dev
+    container_name: joblantern-mcp-pattern
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8087"]
+    ports:
+      - "8087:8087"
+
   mcp-scam-db:
     build:
       context: ..

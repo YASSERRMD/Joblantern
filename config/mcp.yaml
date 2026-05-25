@@ -1,0 +1,25 @@
+# MCP server registry for the Joblantern agent.
+#
+# Each entry describes how the agent should connect to one MCP server.
+# Production deployments override this file by mounting their own copy
+# (or by setting JOBLANTERN_MCP_CONFIG to a different path).
+#
+# Schema:
+#   servers:
+#     - name:        canonical server id (matches `mcp.Implementation.Name`)
+#       enabled:     bool; disabled servers are not dialled
+#       transport:   "stdio" | "http"
+#       command:     argv[0] for stdio transport (path or command-name)
+#       args:        argv[1:] for stdio transport
+#       url:         endpoint for http transport
+#       env:         map of additional environment variables to inject
+#       call_timeout: per-call timeout (Go duration string)
+#       max_retries:  bounded retries on transient errors
+
+servers:
+  - name: joblantern.hello
+    enabled: true
+    transport: stdio
+    command: mcp-hello
+    call_timeout: 10s
+    max_retries: 1

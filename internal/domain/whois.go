@@ -16,13 +16,13 @@ import (
 
 // WHOIS represents the few fields mcp-domain cares about.
 type WHOIS struct {
-	Domain       string    `json:"domain"`
-	CreatedAt    time.Time `json:"created_at,omitempty"`
-	Registrar    string    `json:"registrar,omitempty"`
-	Registrant   string    `json:"registrant,omitempty"`
-	CountryCode  string    `json:"country_code,omitempty"`
-	Raw          string    `json:"raw,omitempty"`
-	Unredacted   bool      `json:"unredacted,omitempty"`
+	Domain      string    `json:"domain"`
+	CreatedAt   time.Time `json:"created_at,omitempty"`
+	Registrar   string    `json:"registrar,omitempty"`
+	Registrant  string    `json:"registrant,omitempty"`
+	CountryCode string    `json:"country_code,omitempty"`
+	Raw         string    `json:"raw,omitempty"`
+	Unredacted  bool      `json:"unredacted,omitempty"`
 }
 
 // WHOISLookup is the interface implemented by both the real port-43
@@ -96,9 +96,9 @@ func validDomain(d string) bool {
 }
 
 var (
-	createdRE = regexp.MustCompile(`(?i)(Creation Date|Created On|created|registered on|Domain Registration Date)\s*[:\.]+\s*([0-9T:\-\.+Zz/ ]+)`)
+	createdRE   = regexp.MustCompile(`(?i)(Creation Date|Created On|created|registered on|Domain Registration Date)\s*[:\.]+\s*([0-9T:\-\.+Zz/ ]+)`)
 	registrarRE = regexp.MustCompile(`(?i)Registrar(?: Name)?\s*[:\.]+\s*(.+)`)
-	countryRE = regexp.MustCompile(`(?i)Registrant Country\s*[:\.]+\s*([A-Za-z]{2,})`)
+	countryRE   = regexp.MustCompile(`(?i)Registrant Country\s*[:\.]+\s*([A-Za-z]{2,})`)
 )
 
 var dateFormats = []string{

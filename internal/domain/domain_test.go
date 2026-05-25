@@ -46,7 +46,10 @@ func TestWaybackSummary(t *testing.T) {
 }
 
 // fakeWHOIS implements WHOISLookup with deterministic values.
-type fakeWHOIS struct{ w *domain.WHOIS; err error }
+type fakeWHOIS struct {
+	w   *domain.WHOIS
+	err error
+}
 
 func (f *fakeWHOIS) Lookup(_ context.Context, _ string) (*domain.WHOIS, error) {
 	return f.w, f.err

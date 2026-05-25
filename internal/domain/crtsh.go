@@ -12,10 +12,10 @@ import (
 
 // CertSummary is the derived SSL-history view used by mcp-domain.
 type CertSummary struct {
-	Domain       string    `json:"domain"`
-	CertCount    int       `json:"cert_count"`
-	FirstCertAt  time.Time `json:"first_cert_at,omitempty"`
-	LastCertAt   time.Time `json:"last_cert_at,omitempty"`
+	Domain        string    `json:"domain"`
+	CertCount     int       `json:"cert_count"`
+	FirstCertAt   time.Time `json:"first_cert_at,omitempty"`
+	LastCertAt    time.Time `json:"last_cert_at,omitempty"`
 	UniqueIssuers []string  `json:"unique_issuers"`
 }
 
@@ -28,8 +28,8 @@ type CrtSHClient struct {
 
 func NewCrtSHClient() *CrtSHClient {
 	return &CrtSHClient{
-		BaseURL:   "https://crt.sh",
-		UserAgent: "Joblantern/0.x (+https://github.com/yasserrmd/joblantern)",
+		BaseURL:    "https://crt.sh",
+		UserAgent:  "Joblantern/0.x (+https://github.com/yasserrmd/joblantern)",
 		HTTPClient: &http.Client{Timeout: 20 * time.Second},
 	}
 }

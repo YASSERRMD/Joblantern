@@ -88,6 +88,17 @@ services:
     ports:
       - "8084:8084"
 
+  mcp-domain:
+    build:
+      context: ..
+      dockerfile: cmd/mcp-domain/Dockerfile
+    image: joblantern/mcp-domain:dev
+    container_name: joblantern-mcp-domain
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8085"]
+    ports:
+      - "8085:8085"
+
 volumes:
   pgdata:
     name: joblantern-pgdata

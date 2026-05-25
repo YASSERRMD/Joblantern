@@ -13,10 +13,10 @@ import (
 
 // ArchiveSummary is the derived Wayback view used by mcp-domain.
 type ArchiveSummary struct {
-	Domain            string    `json:"domain"`
-	EarliestSnapshot  time.Time `json:"earliest_snapshot,omitempty"`
-	LatestSnapshot    time.Time `json:"latest_snapshot,omitempty"`
-	SnapshotCount     int       `json:"snapshot_count"`
+	Domain           string    `json:"domain"`
+	EarliestSnapshot time.Time `json:"earliest_snapshot,omitempty"`
+	LatestSnapshot   time.Time `json:"latest_snapshot,omitempty"`
+	SnapshotCount    int       `json:"snapshot_count"`
 }
 
 // WaybackClient queries the Internet Archive Wayback CDX API.
@@ -28,8 +28,8 @@ type WaybackClient struct {
 
 func NewWaybackClient() *WaybackClient {
 	return &WaybackClient{
-		BaseURL:   "https://web.archive.org",
-		UserAgent: "Joblantern/0.x (+https://github.com/yasserrmd/joblantern)",
+		BaseURL:    "https://web.archive.org",
+		UserAgent:  "Joblantern/0.x (+https://github.com/yasserrmd/joblantern)",
 		HTTPClient: &http.Client{Timeout: 20 * time.Second},
 	}
 }

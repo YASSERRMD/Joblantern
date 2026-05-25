@@ -10,12 +10,12 @@ import (
 // brand new (and therefore suspicious for a company claiming long
 // operation), and approaches 0.0 for well-established domains.
 type Profile struct {
-	Domain       string          `json:"domain"`
-	WHOIS        *WHOIS          `json:"whois,omitempty"`
-	SSL          *CertSummary    `json:"ssl,omitempty"`
-	Archive      *ArchiveSummary `json:"archive,omitempty"`
-	AgeDays      int             `json:"age_days"`
-	FreshnessScore float64       `json:"freshness_score"`
+	Domain         string          `json:"domain"`
+	WHOIS          *WHOIS          `json:"whois,omitempty"`
+	SSL            *CertSummary    `json:"ssl,omitempty"`
+	Archive        *ArchiveSummary `json:"archive,omitempty"`
+	AgeDays        int             `json:"age_days"`
+	FreshnessScore float64         `json:"freshness_score"`
 }
 
 // Composer pulls all three sources in parallel and computes a Profile.
@@ -40,9 +40,18 @@ func NewComposer() *Composer {
 func (c *Composer) FullProfile(ctx context.Context, dom string) (*Profile, error) {
 	p := &Profile{Domain: dom, AgeDays: -1}
 
-	type whoisRes struct{ w *WHOIS; err error }
-	type sslRes struct{ s *CertSummary; err error }
-	type archiveRes struct{ a *ArchiveSummary; err error }
+	type whoisRes struct {
+		w   *WHOIS
+		err error
+	}
+	type sslRes struct {
+		s   *CertSummary
+		err error
+	}
+	type archiveRes struct {
+		a   *ArchiveSummary
+		err error
+	}
 
 	wch := make(chan whoisRes, 1)
 	sch := make(chan sslRes, 1)

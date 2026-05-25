@@ -1,0 +1,34 @@
+{{define "body"}}
+{{with .Data}}
+<div class="card">
+  <p class="muted">Verification <code>{{.ID}}</code></p>
+  <p>Status: <strong>{{.Status}}</strong></p>
+  {{if or (eq .Status "pending") (eq .Status "running")}}
+    <p>The agent is working on this submission. Refresh in a few seconds.</p>
+    <meta http-equiv="refresh" content="3">
+  {{end}}
+
+  {{with .Verdict}}
+    <p>Risk:
+      <span class="badge {{.OverallRisk}}">{{.OverallRisk}}</span>
+      <span class="muted">confidence {{printf "%.0f%%" (mul .Confidence 100.0)}}</span>
+    </p>
+
+    {{if .Reasons}}
+      <p><strong>Reasons</strong></p>
+      <ul>{{range .Reasons}}<li>{{.}}</li>{{end}}</ul>
+    {{end}}
+
+    <p><strong>Evidence</strong></p>
+    {{range .Facts}}
+      <div class="fact {{.SupportsRisk}}">
+        <strong>{{.FactType}}</strong>
+        <span class="muted">[{{.Source}} / {{.ToolName}}] · weight {{printf "%.2f" .Weight}}</span>
+      </div>
+    {{end}}
+  {{end}}
+</div>
+{{end}}
+
+<p><a href="/">← submit another</a></p>
+{{end}}

@@ -68,7 +68,10 @@ func run(addr string, logger *slog.Logger) error {
 		o := risk.Score(facts, risk.DefaultBands)
 		return o.OverallRisk, o.Confidence, o.Reasons
 	})
-	web.NewAPIHandler(r, store, orch)
+	api := web.NewAPIHandler(r, store, orch)
+	if _, err := web.NewUI(r, store, api); err != nil {
+		return err
+	}
 
 	srv := &http.Server{
 		Addr:              addr,

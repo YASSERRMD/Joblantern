@@ -33,3 +33,10 @@ servers:
       OVERPASS_URL: http://localhost:8089/api/interpreter
     call_timeout: 30s
     max_retries: 2
+
+  - name: joblantern.streetview
+    enabled: true
+    transport: stdio
+    command: mcp-streetview
+    call_timeout: 30s
+    max_retries: 1

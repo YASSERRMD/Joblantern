@@ -46,12 +46,12 @@ func New(token string) *Client {
 
 // Image is the subset of Mapillary's image entity we care about.
 type Image struct {
-	ID           string  `json:"id"`
-	CapturedAt   int64   `json:"captured_at,omitempty"` // ms since epoch
-	IsPano       bool    `json:"is_pano,omitempty"`
-	SequenceID   string  `json:"sequence,omitempty"`
-	ThumbURL     string  `json:"thumb_1024_url,omitempty"`
-	OriginalURL  string  `json:"thumb_original_url,omitempty"`
+	ID           string          `json:"id"`
+	CapturedAt   int64           `json:"captured_at,omitempty"` // ms since epoch
+	IsPano       bool            `json:"is_pano,omitempty"`
+	SequenceID   string          `json:"sequence,omitempty"`
+	ThumbURL     string          `json:"thumb_1024_url,omitempty"`
+	OriginalURL  string          `json:"thumb_original_url,omitempty"`
 	GeometryJSON json.RawMessage `json:"geometry,omitempty"`
 }
 

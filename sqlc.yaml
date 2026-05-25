@@ -1,0 +1,59 @@
+# sqlc configuration for Joblantern.
+# https://docs.sqlc.dev/en/stable/reference/config.html
+#
+# We generate Go code from raw SQL queries in queries/ against the schema
+# defined by goose migrations in migrations/. The generated code lands in
+# internal/db/ as the joblanterndb package and is consumed by the agent,
+# the web layer, and every MCP server that needs persistence.
+#
+# We use the pgx/v5 sql driver (not the legacy database/sql lib_pq path):
+#   - go.sql_driver: "pgx/v5"
+#   - emit_pointers_for_null_types: false  → use pgtype.* for NULL columns
+#   - emit_json_tags: true                 → useful for HTTP / audit-log layers
+
+version: "2"
+
+sql:
+  - engine: postgresql
+    schema: migrations
+    queries: queries
+
+    gen:
+      go:
+        package: joblanterndb
+        out: internal/db
+        sql_package: pgx/v5
+
+        # Naming
+        emit_interface: true
+        emit_json_tags: true
+        emit_db_tags: true
+        emit_prepared_queries: false
+        emit_exact_table_names: false
+        emit_empty_slices: true
+        emit_pointers_for_null_types: false
+        emit_methods_with_db_argument: false
+        emit_enum_valid_method: true
+        emit_all_enum_values: true
+
+        # Types
+        json_tags_id_uppercase: false
+        json_tags_case_style: snake
+
+        # Postgres extensions in the schema (PostGIS, pgvector, citext) are
+        # mapped to opaque types so sqlc does not need to model them deeply.
+        overrides:
+          - db_type: "geography"
+            go_type:
+              import: "github.com/jackc/pgx/v5/pgtype"
+              type: "Text"
+          - db_type: "geometry"
+            go_type:
+              import: "github.com/jackc/pgx/v5/pgtype"
+              type: "Text"
+          - db_type: "vector"
+            go_type:
+              import: "github.com/jackc/pgx/v5/pgtype"
+              type: "Text"
+          - db_type: "citext"
+            go_type: "string"

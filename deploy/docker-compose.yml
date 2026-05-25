@@ -99,6 +99,22 @@ services:
     ports:
       - "8085:8085"
 
+  mcp-scam-db:
+    build:
+      context: ..
+      dockerfile: cmd/mcp-scam-db/Dockerfile
+    image: joblantern/mcp-scam-db:dev
+    container_name: joblantern-mcp-scam-db
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8086"]
+    environment:
+      DATABASE_URL: postgres://joblantern:joblantern@postgres:5432/joblantern?sslmode=disable
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8086:8086"
+
 volumes:
   pgdata:
     name: joblantern-pgdata

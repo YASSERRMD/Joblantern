@@ -54,3 +54,12 @@ servers:
     command: mcp-domain
     call_timeout: 30s
     max_retries: 1
+
+  - name: joblantern.scamdb
+    enabled: true
+    transport: stdio
+    command: mcp-scam-db
+    env:
+      DATABASE_URL: postgres://joblantern:joblantern@localhost:5432/joblantern?sslmode=disable
+    call_timeout: 10s
+    max_retries: 1

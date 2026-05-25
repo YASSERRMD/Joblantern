@@ -1,0 +1,17 @@
+{
+  "source_note": "Curated public-domain bands for v1; see docs/MCP-SPECS/salary.md for sources and update cadence.",
+  "bands": [
+    {"country": "AE", "role": "warehouse_worker",  "currency": "AED", "p10": 1200, "p50": 1800, "p90": 2800, "source_url": "https://example/ae-warehouse"},
+    {"country": "AE", "role": "software_engineer", "currency": "AED", "p10": 9000, "p50": 18000, "p90": 35000, "source_url": "https://example/ae-software"},
+    {"country": "BD", "role": "warehouse_worker",  "currency": "BDT", "p10": 12000, "p50": 18000, "p90": 28000, "source_url": "https://example/bd-warehouse"},
+    {"country": "PH", "role": "warehouse_worker",  "currency": "PHP", "p10": 12000, "p50": 18000, "p90": 28000, "source_url": "https://example/ph-warehouse"},
+    {"country": "IN", "role": "software_engineer", "currency": "INR", "p10": 600000, "p50": 1200000, "p90": 3000000, "source_url": "https://example/in-software"}
+  ],
+  "fx_to_usd": {
+    "AED": 0.2723,
+    "BDT": 0.0091,
+    "PHP": 0.0177,
+    "INR": 0.012,
+    "USD": 1.0
+  }
+}

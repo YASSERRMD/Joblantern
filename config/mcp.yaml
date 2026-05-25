@@ -77,3 +77,10 @@ servers:
     command: mcp-salary
     call_timeout: 5s
     max_retries: 0
+
+  - name: joblantern.law
+    enabled: true
+    transport: stdio
+    command: mcp-law
+    call_timeout: 5s
+    max_retries: 0

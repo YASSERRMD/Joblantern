@@ -110,6 +110,17 @@ services:
     ports:
       - "8088:8088"
 
+  mcp-law:
+    build:
+      context: ..
+      dockerfile: cmd/mcp-law/Dockerfile
+    image: joblantern/mcp-law:dev
+    container_name: joblantern-mcp-law
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8089"]
+    ports:
+      - "8089:8089"
+
   mcp-pattern:
     build:
       context: ..

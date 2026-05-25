@@ -1,0 +1,38 @@
+# Self-hosted Nominatim for the Joblantern address MCP server.
+#
+# Bring up separately from the main joblantern stack:
+#
+#   docker compose -f deploy/nominatim/docker-compose.yml up -d
+#
+# Then point the mcp-address server at NOMINATIM_URL=http://localhost:8088.
+#
+# Image: mediagis/nominatim — Apache-2.0 + AGPL-only operator-side code,
+# not redistributed in any Joblantern binary; we use it as a service.
+
+name: joblantern-nominatim
+
+services:
+  nominatim:
+    image: mediagis/nominatim:4.4
+    container_name: joblantern-nominatim
+    restart: unless-stopped
+    environment:
+      # PBF_URL controls which region is imported on first boot.
+      # Default to Monaco (~1 MB) so the stack comes up in minutes; for
+      # real deployments override to your destination region, e.g.
+      #   https://download.geofabrik.de/asia/india-latest.osm.pbf
+      PBF_URL: ${PBF_URL:-https://download.geofabrik.de/europe/monaco-latest.osm.pbf}
+      REPLICATION_URL: ${REPLICATION_URL:-https://download.geofabrik.de/europe/monaco-updates/}
+      NOMINATIM_PASSWORD: ${NOMINATIM_PASSWORD:-joblantern-nominatim}
+      IMPORT_WIKIPEDIA: "false"
+      IMPORT_TIGER_ADDRESSES: "false"
+    ports:
+      - "8088:8080"
+    volumes:
+      - nominatim-data:/var/lib/postgresql/14/main
+      - nominatim-flatnode:/nominatim/flatnode
+    shm_size: 1gb
+
+volumes:
+  nominatim-data:
+  nominatim-flatnode:

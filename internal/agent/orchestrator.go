@@ -7,6 +7,10 @@ import (
 	"time"
 )
 
+// ScoreFunc is the pluggable scoring engine. Replaced in main.go with
+// the real risk-engine scorer (internal/risk.Score).
+type ScoreFunc func(facts []Fact) (risk string, confidence float64, reasons []string)
+
 // Orchestrator runs all configured sub-agents in parallel and
 // aggregates the facts they emit. Final scoring is performed by the
 // internal/risk engine (Phase 14); for Phase 13 the orchestrator
@@ -15,11 +19,18 @@ import (
 type Orchestrator struct {
 	Subagents []Subagent
 	Timeout   time.Duration
+	Score     ScoreFunc // optional; defaults to the built-in placeholder
 }
 
 // New returns an Orchestrator with sensible defaults.
 func New(subs ...Subagent) *Orchestrator {
 	return &Orchestrator{Subagents: subs, Timeout: 60 * time.Second}
+}
+
+// WithScorer overrides the default placeholder scorer.
+func (o *Orchestrator) WithScorer(f ScoreFunc) *Orchestrator {
+	o.Score = f
+	return o
 }
 
 // Run executes every sub-agent concurrently and returns a Verdict.
@@ -50,7 +61,11 @@ func (o *Orchestrator) Run(ctx context.Context, sub Submission) Verdict {
 		return all[i].ToolName < all[j].ToolName
 	})
 
-	risk, conf, reasons := score(all)
+	scorer := o.Score
+	if scorer == nil {
+		scorer = score
+	}
+	risk, conf, reasons := scorer(all)
 	return Verdict{
 		VerificationID: sub.ID,
 		OverallRisk:    risk,

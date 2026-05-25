@@ -25,6 +25,7 @@ import (
 
 	"github.com/yasserrmd/joblantern/internal/agent"
 	"github.com/yasserrmd/joblantern/internal/pattern"
+	"github.com/yasserrmd/joblantern/internal/risk"
 	"github.com/yasserrmd/joblantern/internal/web"
 )
 
@@ -63,7 +64,10 @@ func run(addr string, logger *slog.Logger) error {
 	if err != nil {
 		return err
 	}
-	orch := agent.New(subs...)
+	orch := agent.New(subs...).WithScorer(func(facts []agent.Fact) (string, float64, []string) {
+		o := risk.Score(facts, risk.DefaultBands)
+		return o.OverallRisk, o.Confidence, o.Reasons
+	})
 	web.NewAPIHandler(r, store, orch)
 
 	srv := &http.Server{

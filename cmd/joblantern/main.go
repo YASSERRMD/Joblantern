@@ -53,11 +53,14 @@ func run(addr string, logger *slog.Logger) error {
 	r.Use(chimiddleware.RequestID)
 	r.Use(chimiddleware.Recoverer)
 	r.Use(chimiddleware.RealIP)
+	metrics := web.NewMetrics()
+	r.Use(metrics.Middleware)
 
 	r.Get("/healthz", func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 		_, _ = io.WriteString(w, "ok")
 	})
+	r.Handle("/metrics", metrics.Endpoint())
 
 	store := agent.NewMemoryStore()
 	subs, err := buildBuiltinSubagents()

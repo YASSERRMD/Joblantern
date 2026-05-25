@@ -1,0 +1,15 @@
+{
+  "disclaimer": "Joblantern is not a lawyer. For binding advice consult a licensed professional in your jurisdiction.",
+  "jurisdictions": [
+    {"country_code":"AE","name":"United Arab Emirates","recruitment_fee_legal":false,"max_fee_pct":null,"employer_pays_only":true,"licensing_required":true,"regulator_url":"https://www.mohre.gov.ae/","citation_url":"https://www.mohre.gov.ae/en/laws-and-regulations.aspx"},
+    {"country_code":"SA","name":"Saudi Arabia","recruitment_fee_legal":false,"max_fee_pct":null,"employer_pays_only":true,"licensing_required":true,"regulator_url":"https://www.hrsd.gov.sa/","citation_url":"https://www.hrsd.gov.sa/en"},
+    {"country_code":"QA","name":"Qatar","recruitment_fee_legal":false,"max_fee_pct":null,"employer_pays_only":true,"licensing_required":true,"regulator_url":"https://www.adlsa.gov.qa/en","citation_url":"https://www.adlsa.gov.qa/en"},
+    {"country_code":"BD","name":"Bangladesh","recruitment_fee_legal":true,"max_fee_pct":15,"employer_pays_only":false,"licensing_required":true,"regulator_url":"https://probashi.gov.bd/","citation_url":"https://probashi.gov.bd/"},
+    {"country_code":"PH","name":"Philippines","recruitment_fee_legal":true,"max_fee_pct":100,"employer_pays_only":false,"licensing_required":true,"regulator_url":"https://www.dmw.gov.ph/","citation_url":"https://www.dmw.gov.ph/laws-and-issuances"},
+    {"country_code":"IN","name":"India","recruitment_fee_legal":true,"max_fee_pct":4,"employer_pays_only":false,"licensing_required":true,"regulator_url":"https://emigrate.gov.in/","citation_url":"https://emigrate.gov.in/ext/preLogin.action"},
+    {"country_code":"PK","name":"Pakistan","recruitment_fee_legal":true,"max_fee_pct":15,"employer_pays_only":false,"licensing_required":true,"regulator_url":"https://beoe.gov.pk/","citation_url":"https://beoe.gov.pk/"},
+    {"country_code":"NP","name":"Nepal","recruitment_fee_legal":true,"max_fee_pct":10,"employer_pays_only":false,"licensing_required":true,"regulator_url":"https://dofe.gov.np/","citation_url":"https://dofe.gov.np/"},
+    {"country_code":"LK","name":"Sri Lanka","recruitment_fee_legal":true,"max_fee_pct":15,"employer_pays_only":false,"licensing_required":true,"regulator_url":"https://www.slbfe.lk/","citation_url":"https://www.slbfe.lk/"},
+    {"country_code":"ID","name":"Indonesia","recruitment_fee_legal":true,"max_fee_pct":100,"employer_pays_only":false,"licensing_required":true,"regulator_url":"https://bp2mi.go.id/","citation_url":"https://bp2mi.go.id/"}
+  ]
+}

@@ -46,12 +46,13 @@ func (h *APIHandler) postVerify(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Run asynchronously so the client gets the id immediately.
-	go h.runAndStore(context.Background(), id, sub)
+	go h.RunAndStore(context.Background(), id, sub)
 
 	writeJSON(w, http.StatusAccepted, map[string]string{"verification_id": id})
 }
 
-func (h *APIHandler) runAndStore(ctx context.Context, id string, sub agent.Submission) {
+// RunAndStore exposes the async run for UI handlers that share the same APIHandler.
+func (h *APIHandler) RunAndStore(ctx context.Context, id string, sub agent.Submission) {
 	rec, _ := h.Store.Get(ctx, id)
 	if rec != nil {
 		rec.Status = "running"

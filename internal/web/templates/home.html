@@ -1,0 +1,43 @@
+{{define "body"}}
+<form action="/verify" method="post" class="card">
+  <label>Listing URL</label>
+  <input type="url" name="listing_url" placeholder="https://...">
+
+  <label>Or paste the recruiter message / listing text</label>
+  <textarea name="listing_text" placeholder="Paste the listing..."></textarea>
+
+  <label>Company name</label>
+  <input name="company_name">
+
+  <label>Claimed office address</label>
+  <input name="claimed_address">
+
+  <div style="display:flex;gap:1rem">
+    <div style="flex:1">
+      <label>Recruiter email</label>
+      <input type="email" name="recruiter_email">
+    </div>
+    <div style="flex:1">
+      <label>Recruiter phone</label>
+      <input name="recruiter_phone">
+    </div>
+  </div>
+
+  <div style="display:flex;gap:1rem">
+    <div style="flex:1">
+      <label>Destination country (ISO-3166-2)</label>
+      <input name="jurisdiction" placeholder="AE">
+    </div>
+    <div style="flex:1">
+      <label>Role</label>
+      <input name="role">
+    </div>
+    <div style="flex:1">
+      <label>Domain</label>
+      <input name="domain" placeholder="example.com">
+    </div>
+  </div>
+
+  <p style="margin-top:1rem"><button type="submit">Verify</button></p>
+</form>
+{{end}}

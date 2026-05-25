@@ -1,0 +1,48 @@
+{{define "layout"}}<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{.Title}}</title>
+<style>
+:root { --bg:#0b0d12; --fg:#e8eaef; --muted:#8b8f9a; --accent:#7aa2ff; --green:#3da76a; --yellow:#d6a23a; --red:#d6452a; }
+* { box-sizing: border-box }
+body { margin:0; font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--fg); }
+.container { max-width: 760px; margin: 2rem auto; padding: 0 1rem; }
+.muted { color: var(--muted); }
+.card { border:1px solid #1f2330; padding:1rem; border-radius:8px; margin: .5rem 0; background:#11141c; }
+h1 { font-weight:600; margin: 0 0 .5rem; }
+input, textarea { width:100%; padding:.5rem; background:#11141c; border:1px solid #1f2330; color: var(--fg); border-radius:6px; }
+textarea { min-height: 120px; }
+button { padding:.6rem 1rem; background: var(--accent); color:#000; border:0; border-radius:6px; cursor:pointer; font-weight:600; }
+label { display:block; margin:.5rem 0 .25rem; font-size:.95rem; }
+.badge { display:inline-block; padding:.25rem .6rem; border-radius:999px; font-weight:600; font-size:.85rem; }
+.badge.green  { background:var(--green); color:#fff; }
+.badge.yellow { background:var(--yellow); color:#000; }
+.badge.red    { background:var(--red); color:#fff; }
+.fact { border-left: 3px solid #2a2f3d; padding:.4rem .75rem; margin:.25rem 0; font-size:.92rem; background:#0e1118; }
+.fact.red    { border-color: var(--red); }
+.fact.yellow { border-color: var(--yellow); }
+.fact.green  { border-color: var(--green); }
+footer { font-size:.8rem; color: var(--muted); margin-top:2rem; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1><a href="/" style="color:inherit;text-decoration:none">Joblantern</a></h1>
+  <p class="muted">An agentic AI system that protects job seekers.</p>
+</header>
+{{template "body" .}}
+<footer>
+  <p>Apache 2.0 ·
+    © OpenStreetMap contributors ·
+    Imagery © Mapillary (CC BY-SA 4.0) ·
+    Powered by OpenCorporates ·
+    Joblantern is not a lawyer.
+  </p>
+</footer>
+</div>
+</body>
+</html>
+{{end}}

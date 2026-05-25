@@ -121,6 +121,19 @@ services:
     ports:
       - "8089:8089"
 
+  mcp-routing:
+    build:
+      context: ..
+      dockerfile: cmd/mcp-routing/Dockerfile
+    image: joblantern/mcp-routing:dev
+    container_name: joblantern-mcp-routing
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8090"]
+    environment:
+      ORS_API_KEY: ${ORS_API_KEY:-}
+    ports:
+      - "8090:8090"
+
   mcp-pattern:
     build:
       context: ..

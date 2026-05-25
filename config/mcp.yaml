@@ -84,3 +84,10 @@ servers:
     command: mcp-law
     call_timeout: 5s
     max_retries: 0
+
+  - name: joblantern.routing
+    enabled: true
+    transport: stdio
+    command: mcp-routing
+    call_timeout: 20s
+    max_retries: 1

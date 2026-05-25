@@ -1,0 +1,4 @@
+company_name,address,lat,lon,phone,email,domain,report_source,report_url,summary,reported_at
+"Phantom Recruiters Ltd","1 Fake St, Dubai",25.2048,55.2708,"+971500000001","jobs@phantom-rec.example","phantom-rec.example","manual-seed","https://example.test/p1","Demanded AED 5000 'visa fee' upfront; office did not exist.",2024-01-15
+"Quick Visa Global","Office 12 Sharjah",25.3463,55.4209,"+971500000002","hr@quickvisa.example","quickvisa.example","manual-seed","https://example.test/p2","Promised UAE driver job; asked for passport scans + 8000 AED.",2024-03-09
+"Bright Future Manpower","HQ Dhaka",23.8103,90.4125,"+8801700000003","contact@brightfutureman.example","brightfutureman.example","manual-seed","https://example.test/p3","Charged 200000 BDT recruitment fee illegally.",2024-05-22

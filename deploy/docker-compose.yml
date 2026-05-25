@@ -37,6 +37,17 @@ services:
       timeout: 3s
       retries: 20
 
+  mcp-hello:
+    build:
+      context: ..
+      dockerfile: cmd/mcp-hello/Dockerfile
+    image: joblantern/mcp-hello:dev
+    container_name: joblantern-mcp-hello
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8081"]
+    ports:
+      - "8081:8081"
+
 volumes:
   pgdata:
     name: joblantern-pgdata

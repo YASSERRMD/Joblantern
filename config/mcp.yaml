@@ -70,3 +70,10 @@ servers:
       DATABASE_URL: postgres://joblantern:joblantern@localhost:5432/joblantern?sslmode=disable
     call_timeout: 10s
     max_retries: 1
+
+  - name: joblantern.salary
+    enabled: true
+    transport: stdio
+    command: mcp-salary
+    call_timeout: 5s
+    max_retries: 0

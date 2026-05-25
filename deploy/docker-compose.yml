@@ -99,6 +99,17 @@ services:
     ports:
       - "8085:8085"
 
+  mcp-salary:
+    build:
+      context: ..
+      dockerfile: cmd/mcp-salary/Dockerfile
+    image: joblantern/mcp-salary:dev
+    container_name: joblantern-mcp-salary
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8088"]
+    ports:
+      - "8088:8088"
+
   mcp-pattern:
     build:
       context: ..

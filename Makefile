@@ -75,20 +75,25 @@ tidy: ## Run go mod tidy.
 # Database / codegen (placeholders, wired in Phase 02+)
 # ---------------------------------------------------------------------------
 .PHONY: migrate-up
-migrate-up: ## Apply all pending goose migrations.
-	@if command -v $(GOOSE) >/dev/null 2>&1; then \
-	    $(GOOSE) -dir migrations postgres "$(DATABASE_URL)" up; \
-	else \
-	    echo "goose not installed; install: go install github.com/pressly/goose/v3/cmd/goose@latest"; exit 1; \
-	fi
+migrate-up: ## Apply all pending migrations.
+	$(GO) run ./cmd/goose-migrate -dsn "$(DATABASE_URL)" -dir migrations up
 
 .PHONY: migrate-down
 migrate-down: ## Roll back the most recent migration.
-	$(GOOSE) -dir migrations postgres "$(DATABASE_URL)" down
+	$(GO) run ./cmd/goose-migrate -dsn "$(DATABASE_URL)" -dir migrations down
 
 .PHONY: migrate-status
 migrate-status: ## Show migration status.
-	$(GOOSE) -dir migrations postgres "$(DATABASE_URL)" status
+	$(GO) run ./cmd/goose-migrate -dsn "$(DATABASE_URL)" -dir migrations status
+
+.PHONY: migrate-reset
+migrate-reset: ## Roll all migrations back to zero (development only).
+	$(GO) run ./cmd/goose-migrate -dsn "$(DATABASE_URL)" -dir migrations reset
+
+.PHONY: migrate-create
+migrate-create: ## Create a new SQL migration: NAME=add_thing make migrate-create
+	@test -n "$(NAME)" || (echo "NAME is required (e.g. NAME=add_thing make migrate-create)"; exit 1)
+	$(GO) run ./cmd/goose-migrate -dir migrations create $(NAME) sql
 
 .PHONY: sqlc
 sqlc: ## Generate Go from SQL queries.

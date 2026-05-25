@@ -13,6 +13,7 @@ import (
 type Querier interface {
 	CompleteVerification(ctx context.Context, arg CompleteVerificationParams) error
 	CountEvidenceByRisk(ctx context.Context, verificationID pgtype.UUID) ([]CountEvidenceByRiskRow, error)
+	CountFeedbackByOutcome(ctx context.Context) ([]CountFeedbackByOutcomeRow, error)
 	// Used by Prometheus-style introspection panels.
 	CountMCPAuditByServerToolStatus(ctx context.Context, calledAt pgtype.Timestamptz) ([]CountMCPAuditByServerToolStatusRow, error)
 	// Faster path when the caller only needs density, not the rows.
@@ -41,10 +42,13 @@ type Querier interface {
 	// Append-only writes plus a few read paths used by the observability
 	// subsystem (Phase 18) and the replay tooling.
 	InsertMCPAuditLog(ctx context.Context, arg InsertMCPAuditLogParams) error
+	InsertVerificationFeedback(ctx context.Context, arg InsertVerificationFeedbackParams) (VerificationFeedback, error)
 	ListEvidenceByVerification(ctx context.Context, verificationID pgtype.UUID) ([]EvidenceFact, error)
 	ListEvidenceByVerificationAndType(ctx context.Context, arg ListEvidenceByVerificationAndTypeParams) ([]EvidenceFact, error)
 	ListJurisdictions(ctx context.Context) ([]Jurisdiction, error)
 	ListMCPAuditByVerification(ctx context.Context, verificationID pgtype.UUID) ([]McpAuditLog, error)
+	// Pending = outcome='confirmed_scam' and not yet promoted into scam_reports.
+	ListPendingScamFeedback(ctx context.Context, limit int32) ([]ListPendingScamFeedbackRow, error)
 	ListRecentVerifications(ctx context.Context, limit int32) ([]Verification, error)
 	ListVerificationsByUser(ctx context.Context, arg ListVerificationsByUserParams) ([]Verification, error)
 	// pg_trgm similarity. Threshold is provided by the caller so the agent

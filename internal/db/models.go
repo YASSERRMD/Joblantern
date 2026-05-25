@@ -93,3 +93,11 @@ type Verification struct {
 	CompletedAt    pgtype.Timestamptz `db:"completed_at" json:"completed_at"`
 	ClaimedGeom    interface{}        `db:"claimed_geom" json:"claimed_geom"`
 }
+
+type VerificationFeedback struct {
+	ID             pgtype.UUID        `db:"id" json:"id"`
+	VerificationID pgtype.UUID        `db:"verification_id" json:"verification_id"`
+	Outcome        string             `db:"outcome" json:"outcome"`
+	Comment        pgtype.Text        `db:"comment" json:"comment"`
+	SubmittedAt    pgtype.Timestamptz `db:"submitted_at" json:"submitted_at"`
+}

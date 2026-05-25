@@ -1,0 +1,41 @@
+# Joblantern — base development Docker Compose stack.
+#
+# Phase 01 only provisions Postgres (with PostGIS + pgvector). Subsequent
+# phases will extend this file with: Nominatim, Overpass, the joblantern
+# app service, and one container per MCP server.
+
+name: joblantern
+
+services:
+  postgres:
+    # imresamu/postgis-pgvector bundles Postgres 16 + PostGIS 3.4 + pgvector
+    # in a single image. License: Postgres + Apache 2.0 + PostgreSQL License.
+    # In Phase 02 we will swap to a project-owned Dockerfile under
+    # deploy/postgres/ that also installs pg_trgm and citext, then update
+    # this image reference accordingly.
+    image: imresamu/postgis-pgvector:16-3.4
+    container_name: joblantern-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: joblantern
+      POSTGRES_PASSWORD: joblantern
+      POSTGRES_DB: joblantern
+      # Enable PostGIS + pgvector inside the joblantern database on first boot.
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U joblantern -d joblantern"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:
+    name: joblantern-pgdata
+
+networks:
+  default:
+    name: joblantern-net

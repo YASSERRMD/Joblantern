@@ -1,0 +1,72 @@
+# --- Go ---
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Coverage and profiling
+coverage.out
+coverage.html
+*.prof
+cpu.pprof
+mem.pprof
+
+# Build output
+/bin/
+/build/
+/dist/
+
+# Module cache (rarely committed at repo root)
+/vendor/
+
+# Go workspace files
+go.work
+go.work.sum
+
+# --- Tools we vendor as standalone binaries ---
+/tools/tailwindcss
+/tools/templ
+/tools/goose
+/tools/sqlc
+
+# --- Generated assets ---
+/static/dist/
+/static/tailwind.css
+templates/*_templ.go
+
+# --- Env and secrets ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.crt
+
+# --- Local DB / runtime data ---
+/data/local/
+/pgdata/
+/deploy/nominatim/data/
+/deploy/overpass/data/
+
+# --- Editors and OS ---
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+/logs/
+
+# --- Docker ---
+.docker/
+
+# --- Test artifacts ---
+/testdata/tmp/
+/internal/db/testdata/*.db

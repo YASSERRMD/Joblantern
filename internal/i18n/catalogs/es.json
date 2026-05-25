@@ -1,0 +1,16 @@
+{
+  "dir": "ltr",
+  "messages": {
+    "tagline": "Un sistema de IA agentic que protege a quienes buscan empleo.",
+    "verify_button": "Verificar",
+    "submit_again": "enviar otro",
+    "status": "Estado",
+    "risk": "Riesgo",
+    "reasons": "Razones",
+    "evidence": "Evidencia",
+    "confidence": "confianza",
+    "agent_working": "El agente está procesando esta solicitud. Actualiza en unos segundos.",
+    "title_home": "Joblantern – verificar una oferta de empleo",
+    "title_result": "Verificación"
+  }
+}

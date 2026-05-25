@@ -1,0 +1,16 @@
+{
+  "dir": "ltr",
+  "messages": {
+    "tagline": "An agentic AI system that protects job seekers.",
+    "verify_button": "Verify",
+    "submit_again": "submit another",
+    "status": "Status",
+    "risk": "Risk",
+    "reasons": "Reasons",
+    "evidence": "Evidence",
+    "confidence": "Confidence",
+    "agent_working": "The agent is working on this submission. Refresh in a few seconds.",
+    "title_home": "Joblantern – verify a job listing",
+    "title_result": "Verification"
+  }
+}

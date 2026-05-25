@@ -1,0 +1,16 @@
+{
+  "dir": "ltr",
+  "messages": {
+    "tagline": "Mfumo wa AI unaolinda wanaotafuta kazi.",
+    "verify_button": "Thibitisha",
+    "submit_again": "tuma nyingine",
+    "status": "Hali",
+    "risk": "Hatari",
+    "reasons": "Sababu",
+    "evidence": "Ushahidi",
+    "confidence": "imani",
+    "agent_working": "Wakala anashughulikia uwasilishaji huu. Burudisha baada ya sekunde chache.",
+    "title_home": "Joblantern – thibitisha tangazo la kazi",
+    "title_result": "Uthibitisho"
+  }
+}

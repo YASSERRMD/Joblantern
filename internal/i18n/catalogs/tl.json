@@ -1,0 +1,16 @@
+{
+  "dir": "ltr",
+  "messages": {
+    "tagline": "Isang ahensyang AI na nagtatanggol sa mga naghahanap ng trabaho.",
+    "verify_button": "Suriin",
+    "submit_again": "magpasa ng iba",
+    "status": "Katayuan",
+    "risk": "Panganib",
+    "reasons": "Mga Dahilan",
+    "evidence": "Ebidensya",
+    "confidence": "kumpiyansa",
+    "agent_working": "Pinoproseso ng ahente ang submission. Mag-refresh sa ilang segundo.",
+    "title_home": "Joblantern – suriin ang job listing",
+    "title_result": "Pagsusuri"
+  }
+}

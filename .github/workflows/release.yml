@@ -1,0 +1,150 @@
+name: Release
+
+# Triggered on:
+#   - any tag matching v* (the normal path)
+#   - manual workflow_dispatch with a tag input (useful to backfill v0.1.0,
+#     which was tagged before this workflow existed)
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to build (e.g. v0.1.0). Defaults to current ref.'
+        required: false
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write   # reserved for future sigstore signing
+
+concurrency:
+  group: release-${{ github.event.inputs.tag || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  images:
+    name: Build and push ${{ matrix.binary }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # One image per binary. Each cmd/<binary>/Dockerfile is built
+        # multi-arch (amd64 + arm64) and pushed to:
+        #   ghcr.io/<owner>/joblantern/<binary>:<tag>
+        # Lowercase owner is computed in a setup step below because
+        # GHCR requires lowercase path segments but GitHub usernames
+        # are case-preserving.
+        binary:
+          - joblantern
+          - mcp-hello
+          - mcp-address
+          - mcp-streetview
+          - mcp-registry
+          - mcp-domain
+          - mcp-scam-db
+          - mcp-pattern
+          - mcp-salary
+          - mcp-law
+          - mcp-routing
+    steps:
+      - name: Checkout (resolve tag)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+
+      - name: Compute lowercase owner
+        id: owner
+        run: echo "owner=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+
+      - name: Pick Dockerfile path
+        id: paths
+        run: |
+          if [ "${{ matrix.binary }}" = "joblantern" ]; then
+            echo "dockerfile=deploy/Dockerfile.dev" >> "$GITHUB_OUTPUT"
+          else
+            echo "dockerfile=cmd/${{ matrix.binary }}/Dockerfile" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute image tags
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ steps.owner.outputs.owner }}/joblantern/${{ matrix.binary }}
+          tags: |
+            type=ref,event=tag
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable=${{ !contains(github.ref, '-') }}
+          labels: |
+            org.opencontainers.image.title=joblantern-${{ matrix.binary }}
+            org.opencontainers.image.licenses=Apache-2.0
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ${{ steps.paths.outputs.dockerfile }}
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha,scope=${{ matrix.binary }}
+          cache-to: type=gha,scope=${{ matrix.binary }},mode=max
+
+  release-notes:
+    name: Publish GitHub release notes
+    needs: images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+      - name: Resolve tag name
+        id: tag
+        run: |
+          if [ -n "${{ github.event.inputs.tag }}" ]; then
+            echo "name=${{ github.event.inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Extract section from CHANGELOG
+        id: notes
+        run: |
+          tag='${{ steps.tag.outputs.name }}'
+          ver="${tag#v}"
+          awk -v ver="$ver" '
+            $0 ~ "^## \\[" ver "\\]" { p=1; next }
+            p && /^## \[/             { exit }
+            p                         { print }
+          ' CHANGELOG.md > release-notes.md
+          if [ ! -s release-notes.md ]; then
+            echo "No CHANGELOG section for $tag found; using one-liner." >&2
+            echo "Release $tag." > release-notes.md
+          fi
+      - name: Create / update release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag='${{ steps.tag.outputs.name }}'
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release edit "$tag" --notes-file release-notes.md
+          else
+            gh release create "$tag" \
+              --title "Joblantern $tag" \
+              --notes-file release-notes.md
+          fi

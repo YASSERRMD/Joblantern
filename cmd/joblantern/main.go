@@ -106,6 +106,9 @@ func run(addr string, logger *slog.Logger) error {
 	// Hostile-network surface: /panic-wipe + /lite (no JS, no CSS).
 	web.NewHostile(r, store)
 
+	// NGO operator tools: kiosk mode + single-page PDF printout.
+	web.NewNGO(r, store, api)
+
 	// Public transparency dashboard — reads anonymised aggregates from
 	// the agent store. Future PR replaces the in-memory source with a
 	// materialised view fed by a nightly aggregation job.

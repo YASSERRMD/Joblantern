@@ -1,0 +1,68 @@
+{
+  "manifest_version": 3,
+  "name": "Joblantern",
+  "version": "0.1.0",
+  "description": "Inline scam-risk verdicts on job listings, powered by Joblantern.",
+  "default_locale": "en",
+  "author": "Mohamed Yasser",
+  "homepage_url": "https://github.com/yasserrmd/joblantern",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Joblantern",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://www.linkedin.com/*",
+    "https://*.indeed.com/*",
+    "https://www.bayt.com/*",
+    "https://www.naukrigulf.com/*",
+    "https://www.gulftalent.com/*",
+    "https://*.jobstreet.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/jobs/view/*",
+        "https://www.linkedin.com/jobs/collections/*",
+        "https://*.indeed.com/viewjob*",
+        "https://www.bayt.com/*",
+        "https://www.naukrigulf.com/job-listing-*",
+        "https://www.gulftalent.com/uae/jobs/*",
+        "https://*.jobstreet.com/job/*"
+      ],
+      "js": [
+        "sites/registry.js",
+        "sites/linkedin.js",
+        "sites/indeed.js",
+        "sites/bayt.js",
+        "sites/naukrigulf.js",
+        "sites/gulftalent.js",
+        "sites/jobstreet.js",
+        "content/badge.js",
+        "content/main.js"
+      ],
+      "css": ["content/badge.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "extName":        { "message": "जॉबलैंटर्न" },
+  "extDescription": { "message": "जॉब लिस्टिंग पर त्वरित स्कैम-जोखिम जाँच।" },
+  "popupTagline":   { "message": "नौकरी की जाँच करें" },
+  "openSettings":   { "message": "सेटिंग्स" },
+  "about":          { "message": "जानकारी" }
+}

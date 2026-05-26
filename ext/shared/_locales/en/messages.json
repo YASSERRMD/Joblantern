@@ -1,0 +1,7 @@
+{
+  "extName":        { "message": "Joblantern" },
+  "extDescription": { "message": "Inline scam-risk verdicts on job listings, powered by Joblantern." },
+  "popupTagline":   { "message": "verify a job listing" },
+  "openSettings":   { "message": "Settings" },
+  "about":          { "message": "About" }
+}

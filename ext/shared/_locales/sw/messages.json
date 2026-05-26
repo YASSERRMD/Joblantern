@@ -1,0 +1,7 @@
+{
+  "extName":        { "message": "Joblantern" },
+  "extDescription": { "message": "Ukaguzi wa haraka wa hatari ya udanganyifu kwenye matangazo ya kazi." },
+  "popupTagline":   { "message": "thibitisha tangazo la kazi" },
+  "openSettings":   { "message": "Mipangilio" },
+  "about":          { "message": "Kuhusu" }
+}

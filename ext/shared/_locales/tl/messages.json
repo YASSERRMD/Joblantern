@@ -1,0 +1,7 @@
+{
+  "extName":        { "message": "Joblantern" },
+  "extDescription": { "message": "Mabilis na pagsuri ng panganib ng scam sa mga job listing." },
+  "popupTagline":   { "message": "suriin ang job listing" },
+  "openSettings":   { "message": "Mga Setting" },
+  "about":          { "message": "Tungkol" }
+}

@@ -1,0 +1,7 @@
+{
+  "extName":        { "message": "جوبلانترن" },
+  "extDescription": { "message": "تحقق سريع من إعلانات الوظائف مباشرة في الصفحة." },
+  "popupTagline":   { "message": "تحقق من إعلان وظيفة" },
+  "openSettings":   { "message": "الإعدادات" },
+  "about":          { "message": "حول" }
+}

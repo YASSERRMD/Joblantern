@@ -1,0 +1,7 @@
+{
+  "extName":        { "message": "جابلینٹرن" },
+  "extDescription": { "message": "نوکری کی فہرستوں پر اسکام کے خطرے کی فوری تصدیق۔" },
+  "popupTagline":   { "message": "نوکری کی تصدیق کریں" },
+  "openSettings":   { "message": "ترتیبات" },
+  "about":          { "message": "تعارف" }
+}

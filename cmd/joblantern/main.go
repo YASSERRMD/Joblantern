@@ -103,6 +103,9 @@ func run(addr string, logger *slog.Logger) error {
 	}
 	web.NewBadgeIssuer(r, getenv("JOBLANTERN_BADGE_ISSUER", "http://localhost:8080"), bpriv, bpub, 90*24*time.Hour)
 
+	// Hostile-network surface: /panic-wipe + /lite (no JS, no CSS).
+	web.NewHostile(r, store)
+
 	// Public transparency dashboard — reads anonymised aggregates from
 	// the agent store. Future PR replaces the in-memory source with a
 	// materialised view fed by a nightly aggregation job.

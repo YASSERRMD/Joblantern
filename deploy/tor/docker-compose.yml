@@ -1,0 +1,34 @@
+# Joblantern Tor hidden service.
+#
+# Brings up a tor container that exposes the local Joblantern HTTP
+# server (default :8080) as a v3 onion address. The onion hostname
+# appears at deploy/tor/data/hidden_service/hostname after the first
+# successful boot.
+#
+# Usage:
+#   docker compose -f deploy/tor/docker-compose.yml up -d
+#   cat deploy/tor/data/hidden_service/hostname
+#
+# Production note: this is a *single-hop* convenience deployment. A
+# proper onion service for hostile-network operators should be run in
+# its own machine, ideally behind Whonix or a dedicated Tor gateway —
+# see docs/HOSTILE-NETWORK.md.
+
+name: joblantern-tor
+
+services:
+  tor:
+    image: dperson/torproxy:latest
+    container_name: joblantern-tor
+    restart: unless-stopped
+    environment:
+      LOCATION: US
+      TOR_HiddenServiceDir: /var/lib/tor/hidden_service/
+      TOR_HiddenServicePort: "80 host.docker.internal:8080"
+    volumes:
+      - tor-data:/var/lib/tor/hidden_service
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  tor-data:

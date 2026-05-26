@@ -135,4 +135,21 @@ license-check: ## Fail the build if any dependency carries a disallowed license.
 
 .PHONY: clean
 clean: ## Remove build artefacts.
-	rm -rf $(BIN_DIR) coverage.out coverage.html
+	rm -rf $(BIN_DIR) coverage.out coverage.html ext/dist
+
+# ---------------------------------------------------------------------------
+# WebExtension (Phase 21)
+# ---------------------------------------------------------------------------
+EXT_VERSION ?= 0.1.0
+
+.PHONY: ext-package
+ext-package: ## Build Joblantern WebExtension zips for Chrome and Firefox.
+	VERSION=$(EXT_VERSION) bash ext/build.sh
+
+.PHONY: ext-package-chrome
+ext-package-chrome: ## Build only the Chrome zip.
+	VERSION=$(EXT_VERSION) bash ext/build.sh chrome
+
+.PHONY: ext-package-firefox
+ext-package-firefox: ## Build only the Firefox zip.
+	VERSION=$(EXT_VERSION) bash ext/build.sh firefox

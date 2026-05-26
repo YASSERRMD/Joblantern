@@ -10,6 +10,8 @@ package main
 
 import (
 	"context"
+	"crypto/ed25519"
+	"crypto/rand"
 	"errors"
 	"flag"
 	"io"
@@ -90,6 +92,15 @@ func run(addr string, logger *slog.Logger) error {
 	if err := web.MountStatic(r); err != nil {
 		return err
 	}
+
+	// Recruiter signed-badge issuer. v0.1 generates a fresh keypair per
+	// process; production should load a persistent ed25519 key from
+	// disk (JOBLANTERN_BADGE_KEY, follow-up PR).
+	bpub, bpriv, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		return err
+	}
+	web.NewBadgeIssuer(r, getenv("JOBLANTERN_BADGE_ISSUER", "http://localhost:8080"), bpriv, bpub, 90*24*time.Hour)
 
 	srv := &http.Server{
 		Addr:              addr,

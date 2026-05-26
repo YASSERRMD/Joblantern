@@ -74,6 +74,7 @@ Thumbs.db
 # --- Stray go-build binaries dropped at the repo root ---
 # Use `make build` or `go build -o bin/...` so output goes under /bin/.
 /joblantern
+/joblantern-*
 /goose-migrate
 /mcp-*
 

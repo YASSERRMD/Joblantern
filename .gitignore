@@ -79,3 +79,4 @@ Thumbs.db
 
 # --- Internal planning docs that should stay off GitHub ---
 /docs/ROADMAP-EXTENDED.md
+ext/dist/

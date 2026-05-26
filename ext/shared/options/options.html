@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Joblantern — settings</title>
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+<main>
+  <h1>Joblantern</h1>
+  <p class="muted">Settings</p>
+
+  <form id="settings">
+    <label>API endpoint
+      <input id="apiBase" type="url" placeholder="https://joblantern.example.org">
+    </label>
+
+    <label>API key (optional)
+      <input id="apiKey" type="text" autocomplete="off">
+    </label>
+
+    <label>Cache verdicts for (days)
+      <input id="cacheDays" type="number" min="1" max="30">
+    </label>
+
+    <label class="row">
+      <input id="telemetry" type="checkbox">
+      <span>Send opt-in anonymous usage telemetry</span>
+    </label>
+
+    <button type="submit">Save</button>
+    <span id="status" class="muted"></span>
+  </form>
+
+  <hr>
+  <p class="muted">
+    Joblantern is open source · Apache 2.0 ·
+    <a href="https://github.com/yasserrmd/joblantern" target="_blank" rel="noopener">github</a>
+  </p>
+</main>
+<script src="options.js"></script>
+</body>
+</html>

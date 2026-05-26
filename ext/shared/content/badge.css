@@ -1,0 +1,50 @@
+/* Inline Joblantern verdict badge. */
+.joblantern-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  vertical-align: middle;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  user-select: none;
+}
+.joblantern-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.joblantern-badge.pending { background: #6b7280; }
+.joblantern-badge.green   { background: #3da76a; }
+.joblantern-badge.yellow  { background: #d6a23a; color: #000; }
+.joblantern-badge.red     { background: #d6452a; }
+.joblantern-badge.error   { background: #444; }
+.joblantern-badge:hover { filter: brightness(1.05); }
+
+.joblantern-tooltip {
+  position: absolute;
+  z-index: 2147483647;
+  max-width: 320px;
+  background: #11141c;
+  color: #e8eaef;
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  border: 1px solid #2a2f3d;
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+.joblantern-tooltip h4 {
+  margin: 0 0 6px;
+  font-size: 13px;
+}
+.joblantern-tooltip ul { margin: 4px 0 0; padding-left: 18px; }
+.joblantern-tooltip a { color: #7aa2ff; }

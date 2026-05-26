@@ -1,0 +1,7 @@
+{
+  "extName":        { "message": "Joblantern" },
+  "extDescription": { "message": "Verificación rápida de riesgo de fraude en ofertas de empleo." },
+  "popupTagline":   { "message": "verifica una oferta de empleo" },
+  "openSettings":   { "message": "Configuración" },
+  "about":          { "message": "Acerca de" }
+}

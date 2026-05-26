@@ -1,0 +1,7 @@
+{
+  "extName":        { "message": "জবল্যান্টার্ন" },
+  "extDescription": { "message": "জব লিস্টিংয়ে দ্রুত প্রতারণার ঝুঁকি যাচাই।" },
+  "popupTagline":   { "message": "চাকরির বিজ্ঞপ্তি যাচাই করুন" },
+  "openSettings":   { "message": "সেটিংস" },
+  "about":          { "message": "সম্পর্কে" }
+}

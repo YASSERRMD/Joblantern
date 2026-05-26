@@ -22,6 +22,16 @@ type EvidenceFact struct {
 	FetchedAt      pgtype.Timestamptz `db:"fetched_at" json:"fetched_at"`
 }
 
+type FederatedPeer struct {
+	ID         pgtype.UUID        `db:"id" json:"id"`
+	Url        string             `db:"url" json:"url"`
+	Name       string             `db:"name" json:"name"`
+	Pubkey     string             `db:"pubkey" json:"pubkey"`
+	TrustLevel string             `db:"trust_level" json:"trust_level"`
+	LastSeen   pgtype.Timestamptz `db:"last_seen" json:"last_seen"`
+	CreatedAt  pgtype.Timestamptz `db:"created_at" json:"created_at"`
+}
+
 type Jurisdiction struct {
 	Code                string             `db:"code" json:"code"`
 	Name                string             `db:"name" json:"name"`
@@ -41,6 +51,18 @@ type McpAuditLog struct {
 	Status         string             `db:"status" json:"status"`
 	Error          pgtype.Text        `db:"error" json:"error"`
 	CalledAt       pgtype.Timestamptz `db:"called_at" json:"called_at"`
+}
+
+type Plugin struct {
+	ID          pgtype.UUID        `db:"id" json:"id"`
+	Name        string             `db:"name" json:"name"`
+	Version     string             `db:"version" json:"version"`
+	License     string             `db:"license" json:"license"`
+	Trust       string             `db:"trust" json:"trust"`
+	Manifest    string             `db:"manifest" json:"manifest"`
+	SourceUrl   pgtype.Text        `db:"source_url" json:"source_url"`
+	Enabled     bool               `db:"enabled" json:"enabled"`
+	InstalledAt pgtype.Timestamptz `db:"installed_at" json:"installed_at"`
 }
 
 type ScamReport struct {

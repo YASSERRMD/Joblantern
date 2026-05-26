@@ -1,0 +1,35 @@
+# Example community MCP plugin manifest.
+#
+# Drop this file alongside a built `mcp-example` binary and register it
+# with `make plugin-register PATH=./examples/community-mcp` (or via the
+# UI once Phase 32's admin surface lands).
+
+name: joblantern.example
+display_name: Example Community Plugin
+version: 0.1.0
+description: Reference plugin showing how third parties add an MCP server.
+
+author: Anonymous
+homepage: https://github.com/yasserrmd/joblantern
+license: Apache-2.0
+source_url: https://github.com/yasserrmd/joblantern/tree/main/examples/community-mcp
+
+transport: stdio
+command: mcp-example
+call_timeout: 5s
+
+tools:
+  - name: hello
+    description: Returns a friendly greeting.
+  - name: status
+    description: Returns server status.
+
+attribution:
+  text: "Powered by the Example community plugin"
+  url: "https://example.invalid/"
+
+# Signing fields. For a real plugin, generate an ed25519 keypair, sign
+# the manifest with everything below this section stripped, and paste
+# the result. Plugins marked `external` may omit these fields.
+# pubkey_hex: <64 hex chars>
+# signature_b64: <base64 of ed25519 signature over canonical YAML>

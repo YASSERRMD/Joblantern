@@ -134,6 +134,20 @@ services:
     ports:
       - "8090:8090"
 
+  joblantern-bot:
+    build:
+      context: ..
+      dockerfile: cmd/joblantern-bot/Dockerfile
+    image: joblantern/joblantern-bot:dev
+    container_name: joblantern-bot
+    restart: unless-stopped
+    environment:
+      BOT_ADAPTER: telegram
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      JOBLANTERN_API: http://host.docker.internal:8080
+      JOBLANTERN_VIEW: ${JOBLANTERN_VIEW:-http://localhost:8080}
+    profiles: ["bots"]
+
   mcp-pattern:
     build:
       context: ..

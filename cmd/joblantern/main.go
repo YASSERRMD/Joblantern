@@ -28,6 +28,7 @@ import (
 	"github.com/yasserrmd/joblantern/internal/agent"
 	"github.com/yasserrmd/joblantern/internal/pattern"
 	"github.com/yasserrmd/joblantern/internal/risk"
+	"github.com/yasserrmd/joblantern/internal/transparency"
 	"github.com/yasserrmd/joblantern/internal/web"
 )
 
@@ -101,6 +102,26 @@ func run(addr string, logger *slog.Logger) error {
 		return err
 	}
 	web.NewBadgeIssuer(r, getenv("JOBLANTERN_BADGE_ISSUER", "http://localhost:8080"), bpriv, bpub, 90*24*time.Hour)
+
+	// Public transparency dashboard — reads anonymised aggregates from
+	// the agent store. Future PR replaces the in-memory source with a
+	// materialised view fed by a nightly aggregation job.
+	web.NewTransparency(r, func() []transparency.Verdict {
+		recs, _ := store.List(context.Background(), 0)
+		out := make([]transparency.Verdict, 0, len(recs))
+		for _, rec := range recs {
+			if rec.Verdict == nil {
+				continue
+			}
+			completed := rec.UpdatedAt
+			out = append(out, transparency.Verdict{
+				CompletedAt: completed,
+				Country:     rec.Submission.Jurisdiction,
+				Risk:        rec.Verdict.OverallRisk,
+			})
+		}
+		return out
+	})
 
 	srv := &http.Server{
 		Addr:              addr,

@@ -3,7 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#11141c">
+<link rel="manifest" href="/manifest.webmanifest">
 <title>{{.Title}}</title>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+      navigator.serviceWorker.register("/sw.js").catch(function() {});
+    });
+  }
+</script>
 <style>
 :root { --bg:#0b0d12; --fg:#e8eaef; --muted:#8b8f9a; --accent:#7aa2ff; --green:#3da76a; --yellow:#d6a23a; --red:#d6452a; }
 * { box-sizing: border-box }

@@ -1,0 +1,92 @@
+# Joblantern edge bundle — runs the full stack offline on a small box
+# (Raspberry Pi 5 with 8 GB RAM, mini-PC, kiosk laptop).
+#
+# Includes:
+#   * Postgres + PostGIS + pgvector  (existing image)
+#   * Ollama (local LLM runtime)
+#   * Joblantern + a subset of MCP servers that do not need network access
+#
+# Network-hungry MCP servers (mcp-streetview, mcp-registry, mcp-domain,
+# mcp-routing) are intentionally excluded by default; an operator with a
+# back-haul can re-enable them by un-commenting their entries below.
+
+name: joblantern-edge
+
+services:
+  postgres:
+    image: joblantern/postgres:16-3.4-pgvector
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: joblantern
+      POSTGRES_PASSWORD: joblantern
+      POSTGRES_DB: joblantern
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    # First-run model pull (Qwen2.5-3B Q4_K_M is the recommended default).
+    # Operators can swap the model via the OLLAMA_MODEL env var.
+    # Pull happens out-of-band; this compose just runs the daemon.
+
+  joblantern:
+    build:
+      context: ../..
+      dockerfile: deploy/Dockerfile.dev
+    restart: unless-stopped
+    depends_on: [postgres, ollama]
+    environment:
+      DATABASE_URL: postgres://joblantern:joblantern@postgres:5432/joblantern?sslmode=disable
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5:3b}
+      JOBLANTERN_OFFLINE: "1"
+    ports:
+      - "8080:8080"
+
+  mcp-pattern:
+    build:
+      context: ../..
+      dockerfile: cmd/mcp-pattern/Dockerfile
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8087"]
+    ports:
+      - "8087:8087"
+
+  mcp-law:
+    build:
+      context: ../..
+      dockerfile: cmd/mcp-law/Dockerfile
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8089"]
+    ports:
+      - "8089:8089"
+
+  mcp-salary:
+    build:
+      context: ../..
+      dockerfile: cmd/mcp-salary/Dockerfile
+    restart: unless-stopped
+    command: ["-transport=http", "-addr=:8088"]
+    ports:
+      - "8088:8088"
+
+  mcp-scam-db:
+    build:
+      context: ../..
+      dockerfile: cmd/mcp-scam-db/Dockerfile
+    restart: unless-stopped
+    depends_on: [postgres]
+    command: ["-transport=http", "-addr=:8086"]
+    environment:
+      DATABASE_URL: postgres://joblantern:joblantern@postgres:5432/joblantern?sslmode=disable
+    ports:
+      - "8086:8086"
+
+volumes:
+  pgdata:
+  ollama:

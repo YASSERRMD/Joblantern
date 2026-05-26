@@ -87,6 +87,9 @@ func run(addr string, logger *slog.Logger) error {
 	if _, err := web.NewUI(r, store, api); err != nil {
 		return err
 	}
+	if err := web.MountStatic(r); err != nil {
+		return err
+	}
 
 	srv := &http.Server{
 		Addr:              addr,

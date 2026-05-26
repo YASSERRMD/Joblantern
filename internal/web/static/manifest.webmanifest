@@ -1,0 +1,28 @@
+{
+  "name": "Joblantern",
+  "short_name": "Joblantern",
+  "description": "An agentic AI system that protects job seekers from fraudulent employers, fake listings, and exploitative recruitment schemes.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#11141c",
+  "background_color": "#0b0d12",
+  "icons": [
+    {
+      "src": "/static/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["productivity", "utilities"]
+}

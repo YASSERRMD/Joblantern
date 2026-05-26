@@ -1,0 +1,15 @@
+body {
+  width: 280px;
+  margin: 0;
+  padding: 12px 14px;
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 13px;
+  background: #11141c;
+  color: #e8eaef;
+}
+header { margin-bottom: 8px; }
+header .muted { display:block; color: #8b8f9a; font-size: 11px; margin-top: 2px; }
+section { padding: 6px 0; }
+footer { margin-top: 8px; padding-top: 8px; border-top: 1px solid #2a2f3d; font-size: 11px; }
+a { color: #7aa2ff; }
+.muted { color: #8b8f9a; }

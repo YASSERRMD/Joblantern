@@ -76,3 +76,6 @@ Thumbs.db
 /joblantern
 /goose-migrate
 /mcp-*
+
+# --- Internal planning docs that should stay off GitHub ---
+/docs/ROADMAP-EXTENDED.md

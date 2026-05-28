@@ -14,11 +14,14 @@ func SecurityHeaders(next http.Handler) http.Handler {
 		h.Set("X-Frame-Options", "DENY")
 		h.Set("Referrer-Policy", "strict-origin-when-cross-origin")
 		h.Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+		// Leaflet needs an inline <script> bootstrap on the verdict page,
+		// and OSM tile servers are an external img + connect source.
 		h.Set("Content-Security-Policy",
 			"default-src 'self'; "+
-				"img-src 'self' data: https:; "+
+				"img-src 'self' data: https://*.tile.openstreetmap.org https:; "+
+				"script-src 'self' 'unsafe-inline'; "+
 				"style-src 'self' 'unsafe-inline'; "+
-				"connect-src 'self'; "+
+				"connect-src 'self' https://*.tile.openstreetmap.org; "+
 				"frame-ancestors 'none'; "+
 				"base-uri 'self'")
 		next.ServeHTTP(w, r)

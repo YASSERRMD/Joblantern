@@ -1,45 +1,68 @@
 {{define "body"}}
 {{with .Data}}
-<div class="card">
-  <p class="muted">Verification <code>{{.ID}}</code></p>
-  <p>Status: <strong>{{.Status}}</strong></p>
-  {{if or (eq .Status "pending") (eq .Status "running")}}
-    <p>The agent is working on this submission. Refresh in a few seconds.</p>
+<p class="eyebrow">Verification</p>
+<h1>Verdict</h1>
+<p class="lead">Reference <code>{{.ID}}</code> · status <strong>{{.Status}}</strong></p>
+
+{{if or (eq .Status "pending") (eq .Status "running")}}
+  <div class="card">
+    <p style="margin:0">The agent is gathering evidence on this submission. This page refreshes automatically.</p>
     <meta http-equiv="refresh" content="3">
-  {{end}}
-
-  {{with .Verdict}}
-    <p>Risk:
-      <span class="badge {{.OverallRisk}}">{{.OverallRisk}}</span>
-      <span class="muted">confidence {{printf "%.0f%%" (mul .Confidence 100.0)}}</span>
-    </p>
-
-    {{if .Reasons}}
-      <p><strong>Reasons</strong></p>
-      <ul>{{range .Reasons}}<li>{{.}}</li>{{end}}</ul>
-    {{end}}
-
-    {{range .Facts -}}
-      {{if eq .FactType "address.geocoded" -}}
-        {{$v := .Value -}}
-        <p><strong>Claimed location</strong></p>
-        <div id="jl-map" data-lat="{{index $v "lat"}}" data-lon="{{index $v "lon"}}" data-label="{{index $v "display_name"}}" style="height:280px;border-radius:8px;border:1px solid #1f2330;margin:.5rem 0"></div>
-        <p class="muted" style="font-size:.85rem">{{index $v "display_name"}}</p>
-      {{end -}}
-    {{end}}
-
-    <p><strong>Evidence</strong></p>
-    {{range .Facts}}
-      <div class="fact {{.SupportsRisk}}">
-        <strong>{{.FactType}}</strong>
-        <span class="muted">[{{.Source}} / {{.ToolName}}] · weight {{printf "%.2f" .Weight}}</span>
-      </div>
-    {{end}}
-  {{end}}
-</div>
+  </div>
 {{end}}
 
-<p><a href="/">← submit another</a></p>
+{{with .Verdict}}
+  {{$band := .OverallRisk}}
+  <div class="verdict verdict--{{$band}}">
+    <span class="verdict__dot" aria-hidden="true">
+      {{if eq $band "green"}}✓{{else if eq $band "red"}}!{{else}}?{{end}}
+    </span>
+    <div>
+      <div class="verdict__label">
+        {{if eq $band "green"}}Looks legitimate{{else if eq $band "red"}}Looks unsafe{{else}}Treat with caution{{end}}
+      </div>
+      <div class="verdict__sub">Risk band <strong>{{$band}}</strong> · confidence {{printf "%.0f%%" (mul .Confidence 100.0)}}</div>
+      <div class="meter" role="img" aria-label="confidence {{printf "%.0f%%" (mul .Confidence 100.0)}}">
+        <div class="meter__fill" style="width:{{printf "%.0f%%" (mul .Confidence 100.0)}}"></div>
+      </div>
+    </div>
+  </div>
+
+  {{if .Reasons}}
+    <div class="card">
+      <h2>Why</h2>
+      <ul class="reasons">{{range .Reasons}}<li>{{.}}</li>{{end}}</ul>
+    </div>
+  {{end}}
+
+  {{range .Facts -}}
+    {{if eq .FactType "address.geocoded" -}}
+      {{$v := .Value -}}
+      <div class="card">
+        <h2>Claimed location</h2>
+        <div id="jl-map" class="map" data-lat="{{index $v "lat"}}" data-lon="{{index $v "lon"}}" data-label="{{index $v "display_name"}}"></div>
+        <p class="map-cap">{{index $v "display_name"}}</p>
+      </div>
+    {{end -}}
+  {{end}}
+
+  <div class="card">
+    <h2>Evidence</h2>
+    {{range .Facts}}
+      <div class="fact {{.SupportsRisk}}">
+        <span class="fact__type">{{.FactType}}</span>
+        <span class="fact__meta">{{.Source}} / {{.ToolName}} · weight {{printf "%.2f" .Weight}}</span>
+      </div>
+    {{else}}
+      <p class="muted" style="margin:0">No structured evidence was attached to this verdict.</p>
+    {{end}}
+  </div>
+{{end}}
+{{end}}
+
+<div class="actions">
+  <a class="btn btn--ghost" href="/">← Verify another listing</a>
+</div>
 
 <script src="/static/leaflet/leaflet.js"></script>
 <script>

@@ -7,11 +7,11 @@ import "time"
 
 // Quad is a triple plus the named-graph context.
 type Quad struct {
-	Subject   string
-	Predicate string
-	Object    string
-	Graph     string
-	Source    string    // e.g. "mcp-registry:gov-uk"
+	Subject     string
+	Predicate   string
+	Object      string
+	Graph       string
+	Source      string // e.g. "mcp-registry:gov-uk"
 	HarvestedAt time.Time
 }
 

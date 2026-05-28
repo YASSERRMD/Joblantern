@@ -12,12 +12,12 @@ type Flag struct {
 
 // Submission is the input the rule pack consumes.
 type Submission struct {
-	PaymentMethod      string
-	ShippingMethod     string
-	PriceBelowMedianRatio float64
-	OfferOnlyByDirect  bool
+	PaymentMethod              string
+	ShippingMethod             string
+	PriceBelowMedianRatio      float64
+	OfferOnlyByDirect          bool
 	BuyerPaysShippingViaSeller bool
-	AdvanceFeeRequested bool
+	AdvanceFeeRequested        bool
 }
 
 // Scan runs the rule pack.

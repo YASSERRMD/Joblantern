@@ -5,8 +5,8 @@ package funding
 
 // Funder is one income source.
 type Funder struct {
-	ID    string
-	Name  string
+	ID     string
+	Name   string
 	Annual float64
 }
 

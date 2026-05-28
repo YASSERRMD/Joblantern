@@ -12,9 +12,9 @@ import (
 type Format string
 
 const (
-	FormatHTML    Format = "text/html"
-	FormatTurtle  Format = "text/turtle"
-	FormatJSONLD  Format = "application/ld+json"
+	FormatHTML   Format = "text/html"
+	FormatTurtle Format = "text/turtle"
+	FormatJSONLD Format = "application/ld+json"
 )
 
 // Negotiate picks a format from an Accept header.
@@ -32,9 +32,9 @@ func Negotiate(accept string) Format {
 
 // Handler is the LOD content-negotiating handler.
 type Handler struct {
-	HTML    func(w http.ResponseWriter, r *http.Request)
-	Turtle  func(w http.ResponseWriter, r *http.Request)
-	JSONLD  func(w http.ResponseWriter, r *http.Request)
+	HTML   func(w http.ResponseWriter, r *http.Request)
+	Turtle func(w http.ResponseWriter, r *http.Request)
+	JSONLD func(w http.ResponseWriter, r *http.Request)
 }
 
 func (h Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {

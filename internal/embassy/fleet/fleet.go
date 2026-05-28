@@ -9,11 +9,11 @@ import (
 
 // Kiosk is one deployed device.
 type Kiosk struct {
-	ID            string
-	Embassy       string
-	Country       string
-	Version       string
-	LastHeartbeat time.Time
+	ID             string
+	Embassy        string
+	Country        string
+	Version        string
+	LastHeartbeat  time.Time
 	OnlineHours24h int
 }
 

@@ -7,17 +7,17 @@ import "time"
 
 // Minute is one published meeting record.
 type Minute struct {
-	ID        string
-	MeetingAt time.Time
-	Quorum    bool
-	Topics    []Topic
+	ID          string
+	MeetingAt   time.Time
+	Quorum      bool
+	Topics      []Topic
 	PublishedAt time.Time
 }
 
 // Topic is one discussion item.
 type Topic struct {
-	Title   string
-	Outcome string
+	Title    string
+	Outcome  string
 	CasesRef []string
 	Redacted bool
 }

@@ -16,9 +16,9 @@ type Subscription struct {
 
 // Notification is the wire form delivered to operator endpoints.
 type Notification struct {
-	IncidentID  string    `json:"incident_id"`
-	ListingID   string    `json:"listing_id"`
-	Band        string    `json:"band"`
-	Confidence  float64   `json:"confidence"`
-	At          time.Time `json:"at"`
+	IncidentID string    `json:"incident_id"`
+	ListingID  string    `json:"listing_id"`
+	Band       string    `json:"band"`
+	Confidence float64   `json:"confidence"`
+	At         time.Time `json:"at"`
 }

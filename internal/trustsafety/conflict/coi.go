@@ -5,10 +5,10 @@ import "time"
 
 // Declaration is a single COI disclosure.
 type Declaration struct {
-	SeatID       string
-	DeclaredAt   time.Time
-	Scope        string // free-text; e.g. "funded by ACME"
-	Active       bool
+	SeatID     string
+	DeclaredAt time.Time
+	Scope      string // free-text; e.g. "funded by ACME"
+	Active     bool
 }
 
 // MustRecuse reports whether a seat should recuse from a case whose

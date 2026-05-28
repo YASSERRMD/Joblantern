@@ -5,7 +5,7 @@ package vocab
 // Alignment maps a Joblantern predicate to one or more equivalent
 // external predicates.
 type Alignment struct {
-	Local      string
+	Local        string
 	EquivalentTo []string
 }
 

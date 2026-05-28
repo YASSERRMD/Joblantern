@@ -9,10 +9,10 @@ import "time"
 
 // Step is one step in the partner self-serve flow.
 type Step struct {
-	ID          string
-	Title       string
-	EstMinutes  int
-	Order       int
+	ID         string
+	Title      string
+	EstMinutes int
+	Order      int
 }
 
 // Defaults returns the canonical ordered steps.

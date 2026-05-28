@@ -4,8 +4,8 @@ package colocation
 
 // Region is a colocation candidate.
 type Region struct {
-	ID            string
-	Name          string
+	ID             string
+	Name           string
 	GridGCO2PerKWh float64
 }
 

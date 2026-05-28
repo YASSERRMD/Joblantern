@@ -5,11 +5,11 @@ package advisory
 
 // Member is one board member.
 type Member struct {
-	ID       string
-	Name     string
-	Field    string // "migration", "labor-econ", "law", "ml-ethics", "data-engineering"
+	ID          string
+	Name        string
+	Field       string // "migration", "labor-econ", "law", "ml-ethics", "data-engineering"
 	Affiliation string
-	Term     string // "2026-2028"
+	Term        string // "2026-2028"
 }
 
 // Defaults captures the seed composition.

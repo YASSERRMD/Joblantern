@@ -23,7 +23,7 @@ func (PhoneSplitter) Mutate(body string) string {
 type HomographSwap struct{}
 
 func (HomographSwap) Mutate(body string) string {
-	r := strings.NewReplacer("URGENT", "URGEN" + string('Т'), "Pay", "Pаy")
+	r := strings.NewReplacer("URGENT", "URGEN"+string('Т'), "Pay", "Pаy")
 	return r.Replace(body)
 }
 

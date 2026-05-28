@@ -7,10 +7,10 @@ import "time"
 
 // Spec drives a snapshot export.
 type Spec struct {
-	Year        int
-	Region      string
-	DestBucket  string
-	StoreClass  string // "cold", "deep-archive", "tape"
+	Year       int
+	Region     string
+	DestBucket string
+	StoreClass string // "cold", "deep-archive", "tape"
 }
 
 // Result is the produced artifact.

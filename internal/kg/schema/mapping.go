@@ -12,15 +12,15 @@ const Base = "https://joblantern.org/kg/"
 type Predicate string
 
 const (
-	PredHasRiskBand   Predicate = "hasRiskBand"
-	PredHasIndustry   Predicate = "hasIndustry"
-	PredHasCountry    Predicate = "hasCountry"
-	PredHasPhone      Predicate = "hasPhone"
-	PredHasEmail      Predicate = "hasEmail"
-	PredHasDirector   Predicate = "hasDirector"
-	PredHasAddress    Predicate = "hasAddress"
-	PredHasEvidence   Predicate = "hasEvidence"
-	PredVerifiedAt    Predicate = "verifiedAt"
+	PredHasRiskBand Predicate = "hasRiskBand"
+	PredHasIndustry Predicate = "hasIndustry"
+	PredHasCountry  Predicate = "hasCountry"
+	PredHasPhone    Predicate = "hasPhone"
+	PredHasEmail    Predicate = "hasEmail"
+	PredHasDirector Predicate = "hasDirector"
+	PredHasAddress  Predicate = "hasAddress"
+	PredHasEvidence Predicate = "hasEvidence"
+	PredVerifiedAt  Predicate = "verifiedAt"
 )
 
 // VerdictIRI returns the IRI for a verdict id.

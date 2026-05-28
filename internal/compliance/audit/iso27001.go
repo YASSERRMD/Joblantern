@@ -24,7 +24,7 @@ func Defaults() []Retention {
 // ISO 27001 controls. The verifier walks the chain and recomputes
 // hashes.
 type IntegrityCheck struct {
-	At              time.Time
-	EntriesChecked  int
-	BrokenAt        int // -1 if intact
+	At             time.Time
+	EntriesChecked int
+	BrokenAt       int // -1 if intact
 }

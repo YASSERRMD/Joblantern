@@ -7,8 +7,8 @@ import "io"
 
 // Item is one checklist line.
 type Item struct {
-	Code    string
-	Label   string
+	Code      string
+	Label     string
 	Mandatory bool
 }
 

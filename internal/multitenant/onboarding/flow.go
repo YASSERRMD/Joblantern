@@ -10,12 +10,12 @@ import (
 
 // Application is the signup payload.
 type Application struct {
-	Slug         string
-	DisplayName  string
-	ContactEmail string
-	Country      string
-	Mission      string
-	NGORegistry  string
+	Slug          string
+	DisplayName   string
+	ContactEmail  string
+	Country       string
+	Mission       string
+	NGORegistry   string
 	NGORegistryID string
 }
 

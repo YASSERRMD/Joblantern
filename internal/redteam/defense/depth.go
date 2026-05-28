@@ -6,11 +6,11 @@ package defense
 type Layer string
 
 const (
-	LayerRules     Layer = "rules"
-	LayerAgent     Layer = "agent"
-	LayerHumanMod  Layer = "moderation"
-	LayerRegistry  Layer = "registry"
-	LayerNetwork   Layer = "network"
+	LayerRules    Layer = "rules"
+	LayerAgent    Layer = "agent"
+	LayerHumanMod Layer = "moderation"
+	LayerRegistry Layer = "registry"
+	LayerNetwork  Layer = "network"
 )
 
 // Catch records which layers stopped a given attack.

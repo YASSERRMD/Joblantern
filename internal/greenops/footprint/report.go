@@ -6,12 +6,12 @@ import "time"
 
 // Sample is one verdict's resource use.
 type Sample struct {
-	VerdictID  string
-	At         time.Time
-	CPUSeconds float64
-	LLMtokens  int
-	BytesEgress int64
-	Region     string
+	VerdictID      string
+	At             time.Time
+	CPUSeconds     float64
+	LLMtokens      int
+	BytesEgress    int64
+	Region         string
 	GridGCO2PerKWh float64
 }
 
@@ -33,9 +33,9 @@ func (s Sample) GramsCO2() float64 {
 
 // MonthlySummary is the aggregate.
 type MonthlySummary struct {
-	Month             time.Month
-	Year              int
-	Verdicts          int
-	TotalGramsCO2     float64
-	PerVerdictGrams   float64
+	Month           time.Month
+	Year            int
+	Verdicts        int
+	TotalGramsCO2   float64
+	PerVerdictGrams float64
 }

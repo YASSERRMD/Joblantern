@@ -4,8 +4,8 @@ package groups
 
 // Region is a working group region.
 type Region struct {
-	ID       string
-	Name     string
+	ID          string
+	Name        string
 	Coordinator string
 }
 

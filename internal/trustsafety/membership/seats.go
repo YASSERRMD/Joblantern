@@ -10,22 +10,22 @@ import (
 type SeatKind string
 
 const (
-	SeatNGO        SeatKind = "ngo"
-	SeatTechnical  SeatKind = "technical"
-	SeatAcademic   SeatKind = "academic"
-	SeatRegulator  SeatKind = "regulator"
+	SeatNGO         SeatKind = "ngo"
+	SeatTechnical   SeatKind = "technical"
+	SeatAcademic    SeatKind = "academic"
+	SeatRegulator   SeatKind = "regulator"
 	SeatEngineering SeatKind = "engineering"
 )
 
 // Seat is one occupied seat.
 type Seat struct {
-	ID         string
-	Kind       SeatKind
-	Holder     string
+	ID          string
+	Kind        SeatKind
+	Holder      string
 	Affiliation string
-	StartedAt  time.Time
-	EndsAt     time.Time
-	Suspended  bool
+	StartedAt   time.Time
+	EndsAt      time.Time
+	Suspended   bool
 }
 
 // Active reports whether the seat is currently held.

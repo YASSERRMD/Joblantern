@@ -21,12 +21,12 @@ type Note struct {
 
 // Override records an officer-issued change to a verdict band.
 type Override struct {
-	OfficerID  string
-	At         time.Time
-	FromBand   string
-	ToBand     string
-	Reason     string
-	VerdictID  string
+	OfficerID string
+	At        time.Time
+	FromBand  string
+	ToBand    string
+	Reason    string
+	VerdictID string
 }
 
 // ValidateOverride enforces that an officer override has a documented

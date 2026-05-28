@@ -12,12 +12,12 @@ type Flag struct {
 
 // Submission is the input.
 type Submission struct {
-	Institution          string
-	Program              string
-	OffersLifeExperience bool
-	AccreditorClaim      string
+	Institution           string
+	Program               string
+	OffersLifeExperience  bool
+	AccreditorClaim       string
 	UnaccreditedConfirmed bool
-	WebsiteAgeDays       int
+	WebsiteAgeDays        int
 	UncorroboratedProgram bool
 }
 

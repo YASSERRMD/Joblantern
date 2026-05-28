@@ -8,11 +8,11 @@ package salary
 // Band is the inferred plausible salary range for a candidate at a
 // destination country.
 type Band struct {
-	Country   string
-	Currency  string
-	RoleP25   float64
-	RoleP50   float64
-	RoleP75   float64
+	Country  string
+	Currency string
+	RoleP25  float64
+	RoleP50  float64
+	RoleP75  float64
 }
 
 // Bump computes a risk adjustment based on how far the offered

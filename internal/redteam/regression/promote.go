@@ -6,12 +6,12 @@ import "time"
 
 // Promotion is one promoted fixture entry.
 type Promotion struct {
-	FixtureID   string
-	BodySHA256  string
-	Mutators    []string
-	PromotedAt  time.Time
-	PromotedBy  string
-	Rationale   string
+	FixtureID  string
+	BodySHA256 string
+	Mutators   []string
+	PromotedAt time.Time
+	PromotedBy string
+	Rationale  string
 }
 
 // File is the on-disk format we serialise to internal/redteam/corpus.

@@ -12,11 +12,11 @@ import (
 
 // Cursor is the opaque page handle exchanged with researchers.
 type Cursor struct {
-	After     time.Time `json:"after"`
-	ID        string    `json:"id"`
-	PageSize  int       `json:"n"`
-	Tier      string    `json:"t"`
-	IssuedAt  time.Time `json:"iat"`
+	After    time.Time `json:"after"`
+	ID       string    `json:"id"`
+	PageSize int       `json:"n"`
+	Tier     string    `json:"t"`
+	IssuedAt time.Time `json:"iat"`
 }
 
 // Encode serialises a cursor to a URL-safe string.

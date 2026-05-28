@@ -8,13 +8,13 @@ import "time"
 
 // Archive describes the offboarding bundle.
 type Archive struct {
-	TenantID     string
-	GeneratedAt  time.Time
-	Verdicts     int
-	Evidence     int
-	BlocklistRow int
+	TenantID      string
+	GeneratedAt   time.Time
+	Verdicts      int
+	Evidence      int
+	BlocklistRow  int
 	BytesEstimate int64
-	URL          string
+	URL           string
 }
 
 // OffboardSchedule returns the deletion deadline (now + 30 days).

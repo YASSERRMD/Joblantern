@@ -24,9 +24,9 @@ type Profile struct {
 
 // Result records the audit outcome for one pair.
 type Result struct {
-	Pair      Pair
-	BandA     string
-	BandB     string
+	Pair       Pair
+	BandA      string
+	BandB      string
 	Equivalent bool
 }
 

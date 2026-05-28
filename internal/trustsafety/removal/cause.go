@@ -6,10 +6,10 @@ package removal
 type Cause string
 
 const (
-	CauseBreachCOI        Cause = "undeclared-conflict"
-	CauseAbsenteeism      Cause = "persistent-absenteeism"
-	CauseConfidentiality  Cause = "confidentiality-breach"
-	CauseMisconduct       Cause = "documented-misconduct"
+	CauseBreachCOI       Cause = "undeclared-conflict"
+	CauseAbsenteeism     Cause = "persistent-absenteeism"
+	CauseConfidentiality Cause = "confidentiality-breach"
+	CauseMisconduct      Cause = "documented-misconduct"
 )
 
 // Threshold returns the council vote share required to remove a seat.

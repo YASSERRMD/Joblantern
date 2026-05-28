@@ -5,8 +5,8 @@ import "time"
 
 // Point is one daily measurement.
 type Point struct {
-	Day            time.Time
-	DetectionRate  float64 // 0..1
+	Day             time.Time
+	DetectionRate   float64 // 0..1
 	AdversarialRate float64
 }
 

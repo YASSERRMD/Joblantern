@@ -7,12 +7,12 @@ import "time"
 
 // Partner is a student association running an edu instance.
 type Partner struct {
-	ID         string
-	Name       string
-	Country    string
-	Logo       string
-	Theme      string
-	Members    int
+	ID          string
+	Name        string
+	Country     string
+	Logo        string
+	Theme       string
+	Members     int
 	ActivatedAt time.Time
 }
 

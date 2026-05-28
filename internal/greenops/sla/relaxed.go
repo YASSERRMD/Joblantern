@@ -9,9 +9,9 @@ import "time"
 type Path string
 
 const (
-	PathSubmit      Path = "submit"
-	PathView        Path = "view"
-	PathAggregate   Path = "aggregate"
+	PathSubmit       Path = "submit"
+	PathView         Path = "view"
+	PathAggregate    Path = "aggregate"
 	PathBatchRedTeam Path = "batch-red-team"
 )
 

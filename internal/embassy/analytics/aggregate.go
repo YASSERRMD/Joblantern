@@ -6,12 +6,12 @@ import "time"
 
 // WeekStats is one week of activity for one kiosk.
 type WeekStats struct {
-	KioskID         string
-	WeekStart       time.Time
-	Sessions        int
-	GreenVerdicts   int
-	YellowVerdicts  int
-	RedVerdicts     int
+	KioskID            string
+	WeekStart          time.Time
+	Sessions           int
+	GreenVerdicts      int
+	YellowVerdicts     int
+	RedVerdicts        int
 	OverridesByOfficer int
 	AvgSessionSeconds  int
 }

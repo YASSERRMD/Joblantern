@@ -15,15 +15,15 @@ import (
 
 // listing is the normalized response shape.
 type listing struct {
-	Source       string `json:"source"`
-	ListingID    string `json:"listing_id"`
-	Title        string `json:"title"`
-	City         string `json:"city"`
-	Country      string `json:"country"`
+	Source       string  `json:"source"`
+	ListingID    string  `json:"listing_id"`
+	Title        string  `json:"title"`
+	City         string  `json:"city"`
+	Country      string  `json:"country"`
 	MonthlyRent  float64 `json:"monthly_rent"`
-	Currency     string `json:"currency"`
-	ContactPhone string `json:"contact_phone,omitempty"`
-	ListingURL   string `json:"listing_url,omitempty"`
+	Currency     string  `json:"currency"`
+	ContactPhone string  `json:"contact_phone,omitempty"`
+	ListingURL   string  `json:"listing_url,omitempty"`
 }
 
 // validateURL keeps us from accidentally crawling private nets.

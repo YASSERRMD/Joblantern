@@ -20,13 +20,13 @@ import (
 
 // Account is a verified regulator principal.
 type Account struct {
-	ID            string
-	Country       string
-	Agency        string
-	OfficialEmail string
-	OfficialDomain string
-	LetterSHA256  string
-	VerifiedAt    time.Time
+	ID              string
+	Country         string
+	Agency          string
+	OfficialEmail   string
+	OfficialDomain  string
+	LetterSHA256    string
+	VerifiedAt      time.Time
 	MTLSFingerprint string
 }
 

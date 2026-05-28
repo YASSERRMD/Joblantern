@@ -11,21 +11,21 @@ import (
 
 // Spec is what the partnership requested.
 type Spec struct {
-	PartnerID   string
-	Region      string // residency-compliant
-	StartAt     time.Time
-	EndAt       time.Time
-	Tier        string // "B" or "C"
-	Fields      []string
+	PartnerID string
+	Region    string // residency-compliant
+	StartAt   time.Time
+	EndAt     time.Time
+	Tier      string // "B" or "C"
+	Fields    []string
 }
 
 // Provisioning is the lifecycle status.
 type Provisioning struct {
-	Spec       Spec
-	State      string // "pending", "ready", "destroyed"
-	StateAt    time.Time
-	Hostname   string
-	Database   string
+	Spec     Spec
+	State    string // "pending", "ready", "destroyed"
+	StateAt  time.Time
+	Hostname string
+	Database string
 }
 
 // Validate enforces the minimum invariants.

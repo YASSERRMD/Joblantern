@@ -15,8 +15,8 @@ const (
 
 // TransferDecision is the outcome of a cross-border check.
 type TransferDecision struct {
-	Allowed       bool
-	Mechanism     string // "adequacy", "scc", "consent", "data-localised"
+	Allowed               bool
+	Mechanism             string // "adequacy", "scc", "consent", "data-localised"
 	JustificationRequired bool
 }
 

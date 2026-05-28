@@ -24,18 +24,18 @@ const (
 
 // Agreement is a researcher data-use agreement.
 type Agreement struct {
-	ID                string
-	ResearcherEmail   string
-	Organization      string
-	Tier              string
-	CreatedAt         time.Time
-	Status            Status
-	BodySHA256        string
-	ResearcherSig     []byte
-	JoblanternSig     []byte
-	ResearcherPubKey  ed25519.PublicKey
-	JoblanternPubKey  ed25519.PublicKey
-	Body              string
+	ID               string
+	ResearcherEmail  string
+	Organization     string
+	Tier             string
+	CreatedAt        time.Time
+	Status           Status
+	BodySHA256       string
+	ResearcherSig    []byte
+	JoblanternSig    []byte
+	ResearcherPubKey ed25519.PublicKey
+	JoblanternPubKey ed25519.PublicKey
+	Body             string
 }
 
 // Sign hashes the body, validates the researcher signature and moves

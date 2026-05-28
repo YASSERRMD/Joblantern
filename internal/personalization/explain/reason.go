@@ -10,9 +10,9 @@ import (
 
 // Factors is the structured input to the explainer.
 type Factors struct {
-	RoleMismatch         bool
-	SalaryFarAboveBand   bool
-	DestinationAnomaly   bool
+	RoleMismatch          bool
+	SalaryFarAboveBand    bool
+	DestinationAnomaly    bool
 	YearsBelowRequirement bool
 }
 

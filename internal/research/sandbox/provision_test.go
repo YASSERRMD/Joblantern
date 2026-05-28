@@ -14,7 +14,10 @@ func TestProvisionAutomation(t *testing.T) {
 }
 
 func TestRejectInvalidWindow(t *testing.T) {
-	if err := (Spec{PartnerID: "uni-1", StartAt: time.Now(), EndAt: time.Now(), Tier: "B"}).Validate(); err == nil {
+	now := time.Now()
+	// Same instant for start and end == a zero-length window, which
+	// Validate must reject (end is not strictly after start).
+	if err := (Spec{PartnerID: "uni-1", StartAt: now, EndAt: now, Tier: "B"}).Validate(); err == nil {
 		t.Fatal("expected error for zero-length window")
 	}
 }

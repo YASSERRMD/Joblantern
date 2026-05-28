@@ -1,43 +1,70 @@
 {{define "body"}}
-<form action="/verify" method="post" class="card">
-  <label>Listing URL</label>
-  <input type="url" name="listing_url" placeholder="https://...">
+<p class="eyebrow">Verify before you commit</p>
+<h1>Is this job offer real?</h1>
+<p class="lead">Paste a recruiter message or listing and Joblantern checks it against
+fraud patterns, company registries, and the claimed address — in seconds. The more
+fields you fill in, the sharper the verdict.</p>
 
-  <label>Or paste the recruiter message / listing text</label>
-  <textarea name="listing_text" placeholder="Paste the listing..."></textarea>
+<form action="/verify" method="post" class="card" novalidate>
+  <div class="field">
+    <label for="listing_url">Listing URL</label>
+    <input id="listing_url" type="url" name="listing_url" placeholder="https://…" autocomplete="off">
+    <span class="hint">Link to the original posting, if you have one.</span>
+  </div>
 
-  <label>Company name</label>
-  <input name="company_name">
+  <div class="field">
+    <label for="listing_text">Recruiter message or listing text <span class="req" title="recommended">★</span></label>
+    <textarea id="listing_text" name="listing_text" placeholder="Paste the full message or job description here…"></textarea>
+    <span class="hint">The single most useful field — paste everything the recruiter sent you.</span>
+  </div>
 
-  <label>Claimed office address</label>
-  <input name="claimed_address">
-
-  <div style="display:flex;gap:1rem">
-    <div style="flex:1">
-      <label>Recruiter email</label>
-      <input type="email" name="recruiter_email">
+  <div class="grid grid--2">
+    <div class="field">
+      <label for="company_name">Company name</label>
+      <input id="company_name" name="company_name" placeholder="e.g. Siemens AG" autocomplete="organization">
     </div>
-    <div style="flex:1">
-      <label>Recruiter phone</label>
-      <input name="recruiter_phone">
+    <div class="field">
+      <label for="claimed_address">Claimed office address</label>
+      <input id="claimed_address" name="claimed_address" placeholder="Street, city, country">
+      <span class="hint">We geocode this and show it on a map.</span>
     </div>
   </div>
 
-  <div style="display:flex;gap:1rem">
-    <div style="flex:1">
-      <label>Destination country (ISO-3166-2)</label>
-      <input name="jurisdiction" placeholder="AE">
+  <div class="grid grid--2">
+    <div class="field">
+      <label for="recruiter_email">Recruiter email</label>
+      <input id="recruiter_email" type="email" name="recruiter_email" placeholder="name@company.com" autocomplete="off">
     </div>
-    <div style="flex:1">
-      <label>Role</label>
-      <input name="role">
-    </div>
-    <div style="flex:1">
-      <label>Domain</label>
-      <input name="domain" placeholder="example.com">
+    <div class="field">
+      <label for="recruiter_phone">Recruiter phone</label>
+      <input id="recruiter_phone" name="recruiter_phone" placeholder="+971 …" autocomplete="off" inputmode="tel">
     </div>
   </div>
 
-  <p style="margin-top:1rem"><button type="submit">Verify</button></p>
+  <div class="grid grid--3">
+    <div class="field">
+      <label for="jurisdiction">Destination country</label>
+      <input id="jurisdiction" name="jurisdiction" placeholder="AE" maxlength="2" autocapitalize="characters">
+      <span class="hint">ISO-3166 code</span>
+    </div>
+    <div class="field">
+      <label for="role">Role</label>
+      <input id="role" name="role" placeholder="e.g. driver">
+    </div>
+    <div class="field">
+      <label for="domain">Domain</label>
+      <input id="domain" name="domain" placeholder="example.com" inputmode="url">
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn btn--primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M10.5 3a7.5 7.5 0 105.3 12.8l4.2 4.2 1.4-1.4-4.2-4.2A7.5 7.5 0 0010.5 3zm0 2a5.5 5.5 0 110 11 5.5 5.5 0 010-11z" fill="currentColor"/>
+      </svg>
+      Verify listing
+    </button>
+    <span class="muted" style="font-size:.83rem">Free · no account · nothing is shared with the recruiter.</span>
+  </div>
 </form>
 {{end}}

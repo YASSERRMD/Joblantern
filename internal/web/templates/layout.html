@@ -3,56 +3,198 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#11141c">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="color-scheme" content="light">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/static/leaflet/leaflet.css">
 <title>{{.Title}}</title>
 <script>
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function() {
-      navigator.serviceWorker.register("/sw.js").catch(function() {});
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("/sw.js").catch(function () {});
     });
   }
 </script>
 <style>
-:root { --bg:#0b0d12; --fg:#e8eaef; --muted:#8b8f9a; --accent:#7aa2ff; --green:#3da76a; --yellow:#d6a23a; --red:#d6452a; }
-* { box-sizing: border-box }
-body { margin:0; font-family: -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--fg); }
-.container { max-width: 760px; margin: 2rem auto; padding: 0 1rem; }
-.muted { color: var(--muted); }
-.card { border:1px solid #1f2330; padding:1rem; border-radius:8px; margin: .5rem 0; background:#11141c; }
-h1 { font-weight:600; margin: 0 0 .5rem; }
-input, textarea { width:100%; padding:.5rem; background:#11141c; border:1px solid #1f2330; color: var(--fg); border-radius:6px; }
-textarea { min-height: 120px; }
-button { padding:.6rem 1rem; background: var(--accent); color:#000; border:0; border-radius:6px; cursor:pointer; font-weight:600; }
-label { display:block; margin:.5rem 0 .25rem; font-size:.95rem; }
-.badge { display:inline-block; padding:.25rem .6rem; border-radius:999px; font-weight:600; font-size:.85rem; }
-.badge.green  { background:var(--green); color:#fff; }
-.badge.yellow { background:var(--yellow); color:#000; }
-.badge.red    { background:var(--red); color:#fff; }
-.fact { border-left: 3px solid #2a2f3d; padding:.4rem .75rem; margin:.25rem 0; font-size:.92rem; background:#0e1118; }
-.fact.red    { border-color: var(--red); }
-.fact.yellow { border-color: var(--yellow); }
-.fact.green  { border-color: var(--green); }
-footer { font-size:.8rem; color: var(--muted); margin-top:2rem; }
+/* ------------------------------------------------------------------ *
+ * MY brand design system — navy #1B2A4A / gold #C5A55A / white.
+ * Georgia for display type, system sans for UI/body.
+ * ------------------------------------------------------------------ */
+:root{
+  --navy:#1B2A4A; --navy-deep:#0F1B33; --gold:#C5A55A; --gold-soft:#e7d6ab;
+  --white:#ffffff; --grey-50:#f7f8fa; --grey-100:#F2F2F2; --grey-200:#e4e7ec;
+  --grey-300:#d2d7e0; --ink:#2C2C2C; --muted:#666666;
+  --green:#1f8a4c; --green-bg:#e8f5ee; --amber:#b9791a; --amber-bg:#fbf2e2;
+  --red:#c0392b; --red-bg:#fbeae8;
+  --radius:14px; --radius-sm:9px; --shadow:0 1px 2px rgba(15,27,51,.06),0 8px 24px rgba(15,27,51,.08);
+  --ring:0 0 0 3px rgba(197,165,90,.45);
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+  --maxw:880px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--sans);color:var(--ink);
+  background:var(--grey-100);line-height:1.55;
+  font-size:16px;-webkit-font-smoothing:antialiased;
+}
+a{color:var(--navy);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:none;box-shadow:var(--ring);border-radius:6px}
+
+/* ---- top app bar ---- */
+.appbar{background:var(--navy);color:#fff;border-bottom:3px solid var(--gold)}
+.appbar__inner{max-width:var(--maxw);margin:0 auto;padding:.85rem 1.25rem;
+  display:flex;align-items:center;gap:.8rem}
+.brand{display:flex;align-items:center;gap:.7rem;color:#fff}
+.brand:hover{text-decoration:none}
+.brand__logo{flex:0 0 auto}
+.brand__name{font-family:var(--serif);font-weight:700;font-size:1.22rem;letter-spacing:.2px;line-height:1}
+.brand__name .accent{color:var(--gold)}
+.brand__tag{font-size:.74rem;color:#c9d2e4;letter-spacing:.3px;margin-top:.15rem}
+.appbar__spacer{flex:1}
+.appbar__link{color:#c9d2e4;font-size:.85rem}
+.appbar__link:hover{color:#fff}
+
+/* ---- layout ---- */
+main{max-width:var(--maxw);margin:0 auto;padding:1.75rem 1.25rem 3rem}
+.muted{color:var(--muted)}
+.eyebrow{font-family:var(--serif);text-transform:uppercase;letter-spacing:.16em;
+  font-size:.72rem;color:var(--gold);font-weight:700;margin:0 0 .4rem}
+h1{font-family:var(--serif);color:var(--navy);font-weight:700;
+  font-size:1.9rem;line-height:1.15;margin:0 0 .5rem}
+h2{font-family:var(--serif);color:var(--navy);font-weight:700;font-size:1.15rem;margin:1.4rem 0 .6rem}
+.lead{color:var(--muted);font-size:1.02rem;max-width:60ch;margin:0 0 1.3rem}
+
+/* ---- card ---- */
+.card{background:var(--white);border:1px solid var(--grey-200);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem;margin:0 0 1.1rem}
+.card--flush{padding:0;overflow:hidden}
+
+/* ---- forms ---- */
+.field{margin:0 0 1.05rem}
+.field > label{display:block;font-weight:600;color:var(--navy);
+  font-size:.9rem;margin:0 0 .35rem}
+.field .req{color:var(--gold);font-weight:700}
+.field .hint{display:block;color:var(--muted);font-size:.8rem;margin:.3rem 0 0}
+input,textarea,select{
+  width:100%;padding:.7rem .8rem;font:inherit;color:var(--ink);
+  background:var(--white);border:1px solid var(--grey-300);border-radius:var(--radius-sm);
+  transition:border-color .15s,box-shadow .15s;
+}
+input::placeholder,textarea::placeholder{color:#aab0bd}
+input:hover,textarea:hover,select:hover{border-color:#b6bdc9}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:var(--ring)}
+textarea{min-height:130px;resize:vertical}
+.grid{display:grid;gap:1.05rem 1.1rem}
+.grid--2{grid-template-columns:1fr 1fr}
+.grid--3{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:620px){.grid--2,.grid--3{grid-template-columns:1fr}}
+
+/* ---- buttons ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.78rem 1.5rem;font:inherit;font-weight:700;border:0;border-radius:var(--radius-sm);
+  cursor:pointer;transition:background .15s,transform .05s}
+.btn:active{transform:translateY(1px)}
+.btn--primary{background:var(--navy);color:#fff}
+.btn--primary:hover{background:#243a64;text-decoration:none}
+.btn--ghost{background:transparent;color:var(--navy);border:1px solid var(--grey-300)}
+.btn--ghost:hover{border-color:var(--navy);text-decoration:none}
+.actions{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-top:.4rem}
+
+/* ---- verdict ---- */
+.verdict{display:flex;align-items:center;gap:1.1rem;padding:1.3rem 1.6rem;
+  border-radius:var(--radius);border:1px solid var(--grey-200)}
+.verdict--green{background:var(--green-bg);border-color:#bfe4cd}
+.verdict--yellow{background:var(--amber-bg);border-color:#f0dcae}
+.verdict--red{background:var(--red-bg);border-color:#f1c4bd}
+.verdict__dot{flex:0 0 auto;width:54px;height:54px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.5rem}
+.verdict--green .verdict__dot{background:var(--green)}
+.verdict--yellow .verdict__dot{background:var(--amber)}
+.verdict--red .verdict__dot{background:var(--red)}
+.verdict__label{font-family:var(--serif);font-size:1.45rem;font-weight:700;line-height:1.1;text-transform:capitalize}
+.verdict--green .verdict__label{color:#15673a}
+.verdict--yellow .verdict__label{color:#8a5a12}
+.verdict--red .verdict__label{color:#94291d}
+.verdict__sub{color:var(--muted);font-size:.9rem;margin-top:.15rem}
+
+/* confidence meter */
+.meter{margin-top:.55rem;height:8px;border-radius:99px;background:rgba(15,27,51,.1);overflow:hidden;max-width:260px}
+.meter__fill{height:100%;border-radius:99px;background:var(--navy)}
+
+/* badges */
+.badge{display:inline-flex;align-items:center;padding:.2rem .65rem;border-radius:99px;
+  font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+.badge.green{background:var(--green-bg);color:#15673a}
+.badge.yellow{background:var(--amber-bg);color:#8a5a12}
+.badge.red{background:var(--red-bg);color:#94291d}
+
+/* reasons */
+.reasons{list-style:none;padding:0;margin:.4rem 0 0}
+.reasons li{position:relative;padding:.32rem 0 .32rem 1.3rem;color:var(--ink);font-size:.95rem}
+.reasons li::before{content:"";position:absolute;left:0;top:.85rem;width:7px;height:7px;
+  border-radius:50%;background:var(--gold)}
+
+/* evidence facts */
+.fact{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  border:1px solid var(--grey-200);border-left:4px solid var(--grey-300);
+  border-radius:var(--radius-sm);padding:.7rem .9rem;margin:.5rem 0;background:var(--grey-50)}
+.fact.red{border-left-color:var(--red)}
+.fact.yellow{border-left-color:var(--amber)}
+.fact.green{border-left-color:var(--green)}
+.fact__type{font-weight:700;color:var(--navy);font-size:.92rem}
+.fact__meta{color:var(--muted);font-size:.8rem;text-align:right;white-space:nowrap}
+code{background:var(--grey-100);padding:.1rem .4rem;border-radius:5px;font-size:.85em}
+
+/* map */
+.map{height:300px;border-radius:var(--radius);border:1px solid var(--grey-200);overflow:hidden}
+.map-cap{color:var(--muted);font-size:.82rem;margin:.5rem 0 0}
+
+/* footer */
+.foot{background:var(--navy-deep);color:#aeb9d0;margin-top:2.5rem}
+.foot__inner{max-width:var(--maxw);margin:0 auto;padding:1.25rem;font-size:.78rem;
+  display:flex;flex-wrap:wrap;gap:.4rem 1rem;align-items:center}
+.foot__inner a{color:#cdd6e8}
+.foot__dot{color:var(--gold)}
 </style>
 </head>
 <body>
-<div class="container">
-<header>
-  <h1><a href="/" style="color:inherit;text-decoration:none">Joblantern</a></h1>
-  <p class="muted">An agentic AI system that protects job seekers.</p>
+<header class="appbar">
+  <div class="appbar__inner">
+    <a class="brand" href="/" aria-label="Joblantern home">
+      <span class="brand__logo" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 48 48" role="img">
+          <rect x="9" y="9" width="30" height="30" rx="5" transform="rotate(45 24 24)" fill="#fff"/>
+          <rect x="13" y="13" width="22" height="22" rx="4" transform="rotate(45 24 24)" fill="none" stroke="#C5A55A" stroke-width="2"/>
+          <text x="19" y="30" font-family="Georgia,serif" font-size="17" font-weight="700" fill="#1B2A4A">M</text>
+          <text x="27" y="30" font-family="Georgia,serif" font-size="17" font-weight="700" fill="#C5A55A">Y</text>
+        </svg>
+      </span>
+      <span>
+        <span class="brand__name">Job<span class="accent">lantern</span></span>
+        <span class="brand__tag">Recruitment-fraud verification</span>
+      </span>
+    </a>
+    <span class="appbar__spacer"></span>
+    <a class="appbar__link" href="/transparency">Transparency</a>
+  </div>
 </header>
+
+<main>
 {{template "body" .}}
-<footer>
-  <p>Apache 2.0 ·
-    © OpenStreetMap contributors ·
-    Imagery © Mapillary (CC BY-SA 4.0) ·
-    Powered by OpenCorporates ·
-    Joblantern is not a lawyer.
-  </p>
+</main>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <span>Apache 2.0</span><span class="foot__dot">·</span>
+    <span>© OpenStreetMap contributors</span><span class="foot__dot">·</span>
+    <span>Imagery © Mapillary (CC BY-SA 4.0)</span><span class="foot__dot">·</span>
+    <span>Powered by OpenCorporates</span><span class="foot__dot">·</span>
+    <span>Joblantern is not a lawyer.</span>
+  </div>
 </footer>
-</div>
 </body>
 </html>
 {{end}}

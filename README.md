@@ -48,6 +48,21 @@ cites its source, and every verdict is reproducible.
 | **Score** | A deterministic engine fuses weighted, sourced facts into a **green / amber / red** band with a confidence figure. |
 | **Verdict** | A reproducible result with cited evidence, an optional map of the claimed office, and a publicly verifiable signature. |
 
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/assets/screenshot-verdict-green.png" alt="Green verdict — a legitimate Munich engineering role, geocoded office shown on a map" width="100%"><br>
+      <sub><b>Legitimate offer.</b> A real Munich engineering role clears to <b>green</b>; the claimed office geocodes and is plotted on an OpenStreetMap map, with each fact cited to the tool that produced it.</sub>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/assets/screenshot-verdict-red.png" alt="Red verdict — a Dubai driver scam with wire-only processing fee and no interview" width="100%"><br>
+      <sub><b>Recruitment scam.</b> A Dubai "driver" offer with a Western-Union processing fee, no interview, and WhatsApp-only contact is flagged <b>red</b> — the "Why" panel lists the red-flag patterns behind the verdict.</sub>
+    </td>
+  </tr>
+</table>
+
 ## Highlights
 
 - 🔎 **Evidence, not opinions** — every verdict lists weighted facts with the

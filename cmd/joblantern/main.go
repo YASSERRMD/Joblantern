@@ -24,8 +24,10 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	chimiddleware "github.com/go-chi/chi/v5/middleware"
+	"github.com/modelcontextprotocol/go-sdk/mcp"
 
 	"github.com/yasserrmd/joblantern/internal/agent"
+	"github.com/yasserrmd/joblantern/internal/mcpclient"
 	"github.com/yasserrmd/joblantern/internal/pattern"
 	"github.com/yasserrmd/joblantern/internal/risk"
 	"github.com/yasserrmd/joblantern/internal/transparency"
@@ -217,7 +219,68 @@ func buildBuiltinSubagents() ([]agent.Subagent, error) {
 				}}
 			},
 		},
+		buildAddressSubagent(),
 	}, nil
+}
+
+// buildAddressSubagent dials the mcp-address server (if MCP_ADDRESS_URL is
+// set) and produces an address.geocoded fact for every submission that
+// carries a claimed_address. The dial happens lazily per request so the
+// app stays healthy when the MCP server is offline.
+func buildAddressSubagent() agent.Subagent {
+	url := os.Getenv("MCP_ADDRESS_URL")
+	return &agent.MCPSubagent{
+		NameStr: "address",
+		Run_: func(ctx context.Context, sub agent.Submission) []agent.Fact {
+			if url == "" || sub.ClaimedAddress == "" {
+				return nil
+			}
+			cctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+			defer cancel()
+			tr := &mcp.StreamableClientTransport{Endpoint: url, DisableStandaloneSSE: true}
+			cli, err := mcpclient.Dial(cctx, mcpclient.Config{Server: "joblantern.address", CallTimeout: 8 * time.Second}, tr)
+			if err != nil {
+				slog.Warn("mcp-address dial failed", "err", err)
+				return nil
+			}
+			defer func() { _ = cli.Close() }()
+			var out struct {
+				Found       bool    `json:"found"`
+				Lat         float64 `json:"lat"`
+				Lon         float64 `json:"lon"`
+				DisplayName string  `json:"display_name"`
+				Code        string  `json:"code"`
+			}
+			args := map[string]any{"address": sub.ClaimedAddress}
+			if sub.Jurisdiction != "" {
+				args["country_code"] = sub.Jurisdiction
+			}
+			if _, err := cli.CallTool(cctx, "verify_address_exists", args, &out); err != nil {
+				slog.Warn("mcp-address call failed", "err", err)
+				return nil
+			}
+			if !out.Found {
+				return []agent.Fact{{
+					Source: "joblantern.address", ToolName: "verify_address_exists",
+					FactType:     "address.not_found",
+					Value:        map[string]any{"address": sub.ClaimedAddress, "code": out.Code},
+					SupportsRisk: "red",
+					Weight:       0.5,
+				}}
+			}
+			return []agent.Fact{{
+				Source: "joblantern.address", ToolName: "verify_address_exists",
+				FactType: "address.geocoded",
+				Value: map[string]any{
+					"lat":          out.Lat,
+					"lon":          out.Lon,
+					"display_name": out.DisplayName,
+				},
+				SupportsRisk: "green",
+				Weight:       0.3,
+			}}
+		},
+	}
 }
 
 func probe(addr string) int {

@@ -19,6 +19,15 @@
       <ul>{{range .Reasons}}<li>{{.}}</li>{{end}}</ul>
     {{end}}
 
+    {{range .Facts -}}
+      {{if eq .FactType "address.geocoded" -}}
+        {{$v := .Value -}}
+        <p><strong>Claimed location</strong></p>
+        <div id="jl-map" data-lat="{{index $v "lat"}}" data-lon="{{index $v "lon"}}" data-label="{{index $v "display_name"}}" style="height:280px;border-radius:8px;border:1px solid #1f2330;margin:.5rem 0"></div>
+        <p class="muted" style="font-size:.85rem">{{index $v "display_name"}}</p>
+      {{end -}}
+    {{end}}
+
     <p><strong>Evidence</strong></p>
     {{range .Facts}}
       <div class="fact {{.SupportsRisk}}">
@@ -31,4 +40,22 @@
 {{end}}
 
 <p><a href="/">← submit another</a></p>
+
+<script src="/static/leaflet/leaflet.js"></script>
+<script>
+(function () {
+  if (typeof L === "undefined") return;
+  var el = document.getElementById("jl-map");
+  if (!el) return;
+  var lat = parseFloat(el.dataset.lat);
+  var lon = parseFloat(el.dataset.lon);
+  if (!isFinite(lat) || !isFinite(lon)) return;
+  var map = L.map(el, { zoomControl: true, attributionControl: true }).setView([lat, lon], 14);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "© OpenStreetMap contributors"
+  }).addTo(map);
+  L.marker([lat, lon]).addTo(map).bindPopup(el.dataset.label || "Claimed location").openPopup();
+})();
+</script>
 {{end}}

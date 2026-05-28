@@ -7,16 +7,16 @@ import "time"
 
 // Listing is a generated test listing.
 type Listing struct {
-	ID        string
-	Title     string
-	Body      string
-	Country   string
-	Industry  string
-	Phone     string
-	Email     string
-	Domain    string
-	Salary    float64
-	Currency  string
+	ID          string
+	Title       string
+	Body        string
+	Country     string
+	Industry    string
+	Phone       string
+	Email       string
+	Domain      string
+	Salary      float64
+	Currency    string
 	GroundTruth string // "scam", "ambiguous", "legit"
 }
 

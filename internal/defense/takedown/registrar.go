@@ -11,12 +11,12 @@ import (
 
 // Packet is the assembled report.
 type Packet struct {
-	Registrar       string
-	Domain          string
-	ReportedAt      time.Time
-	Evidence        []Evidence
-	ContactEmail    string
-	ContactOrg      string
+	Registrar    string
+	Domain       string
+	ReportedAt   time.Time
+	Evidence     []Evidence
+	ContactEmail string
+	ContactOrg   string
 }
 
 // Evidence is one item attached to the packet.

@@ -15,9 +15,9 @@ type Intensity float64
 
 // Sample is one measurement.
 type Sample struct {
-	Region   string
-	At       time.Time
-	Value    Intensity
+	Region string
+	At     time.Time
+	Value  Intensity
 }
 
 // Client is the abstraction.

@@ -12,24 +12,24 @@ import (
 type Stage string
 
 const (
-	StageIntake          Stage = "intake"
-	StageEvidence        Stage = "evidence"
-	StageVote            Stage = "vote"
-	StageDecided         Stage = "decided"
+	StageIntake   Stage = "intake"
+	StageEvidence Stage = "evidence"
+	StageVote     Stage = "vote"
+	StageDecided  Stage = "decided"
 )
 
 // Appeal is the council appeal record.
 type Appeal struct {
-	ID           string
-	Subject      string
-	FiledBy      string
-	FiledAt      time.Time
-	Stage        Stage
-	StageAt      time.Time
-	Decision     string
-	DecidedAt    time.Time
-	Recused      []string
-	Votes        map[string]string // seatID -> "uphold"|"reject"|"abstain"
+	ID        string
+	Subject   string
+	FiledBy   string
+	FiledAt   time.Time
+	Stage     Stage
+	StageAt   time.Time
+	Decision  string
+	DecidedAt time.Time
+	Recused   []string
+	Votes     map[string]string // seatID -> "uphold"|"reject"|"abstain"
 }
 
 // Promote advances the appeal to the next stage. Returns an error if

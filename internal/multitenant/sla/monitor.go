@@ -7,10 +7,10 @@ import "time"
 
 // Target is the SLA target per plan.
 type Target struct {
-	PlanID         string
-	UptimePct      float64
-	VerdictP99Ms   int
-	SupportHours   string
+	PlanID       string
+	UptimePct    float64
+	VerdictP99Ms int
+	SupportHours string
 }
 
 // Plans is the canonical SLA table.

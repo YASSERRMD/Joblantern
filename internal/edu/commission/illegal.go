@@ -6,9 +6,9 @@ package commission
 
 // Rule captures the per-country position on student-paid commissions.
 type Rule struct {
-	Country         string
+	Country          string
 	StudentMaxFeeUSD float64
-	Notes           string
+	Notes            string
 }
 
 // Defaults is a seed table.

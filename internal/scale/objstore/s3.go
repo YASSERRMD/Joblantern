@@ -11,11 +11,11 @@ import (
 
 // Object is a stored artifact.
 type Object struct {
-	Bucket  string
-	Key     string
-	Size    int64
-	SHA256  string
-	Reader  io.ReadCloser
+	Bucket string
+	Key    string
+	Size   int64
+	SHA256 string
+	Reader io.ReadCloser
 }
 
 // Store is the abstraction.

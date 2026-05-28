@@ -7,7 +7,7 @@ package power
 type Mode string
 
 const (
-	ModeNormal     Mode = "normal"
+	ModeNormal       Mode = "normal"
 	ModeBatterySaver Mode = "battery_saver"
 )
 

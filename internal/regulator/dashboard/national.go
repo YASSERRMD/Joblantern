@@ -7,14 +7,14 @@ import "time"
 
 // Stats is the canonical national view served to a regulator account.
 type Stats struct {
-	Country               string    `json:"country"`
-	GeneratedAt           time.Time `json:"generated_at"`
-	TotalVerdicts         int       `json:"total_verdicts"`
-	RedVerdicts           int       `json:"red_verdicts"`
-	YellowVerdicts        int       `json:"yellow_verdicts"`
-	GreenVerdicts         int       `json:"green_verdicts"`
-	TopRedFlags           []Bucket  `json:"top_red_flags"`
-	TopDestinationIndustries []Bucket `json:"top_destination_industries"`
+	Country                  string    `json:"country"`
+	GeneratedAt              time.Time `json:"generated_at"`
+	TotalVerdicts            int       `json:"total_verdicts"`
+	RedVerdicts              int       `json:"red_verdicts"`
+	YellowVerdicts           int       `json:"yellow_verdicts"`
+	GreenVerdicts            int       `json:"green_verdicts"`
+	TopRedFlags              []Bucket  `json:"top_red_flags"`
+	TopDestinationIndustries []Bucket  `json:"top_destination_industries"`
 }
 
 // Bucket is a label/count pair.

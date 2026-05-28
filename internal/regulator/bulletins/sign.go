@@ -15,13 +15,13 @@ import (
 
 // Bulletin is one signed public statement.
 type Bulletin struct {
-	ID          string    `json:"id"`
-	Regulator   string    `json:"regulator"`
-	IssuedAt    time.Time `json:"issued_at"`
-	Title       string    `json:"title"`
-	Body        string    `json:"body"`
-	Signature   string    `json:"signature"`
-	KeyFingerprint string `json:"key_fingerprint"`
+	ID             string    `json:"id"`
+	Regulator      string    `json:"regulator"`
+	IssuedAt       time.Time `json:"issued_at"`
+	Title          string    `json:"title"`
+	Body           string    `json:"body"`
+	Signature      string    `json:"signature"`
+	KeyFingerprint string    `json:"key_fingerprint"`
 }
 
 // canonical returns the canonical JSON used as the signing payload.

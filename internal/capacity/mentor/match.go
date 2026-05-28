@@ -6,9 +6,9 @@ import "strings"
 
 // Operator is one operator profile.
 type Operator struct {
-	ID       string
-	Country  string
-	Region   string
+	ID        string
+	Country   string
+	Region    string
 	Languages []string
 	IsMentor  bool
 	OpenSlots int

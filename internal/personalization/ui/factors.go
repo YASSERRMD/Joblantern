@@ -3,9 +3,9 @@ package ui
 
 // FactorRow is one factor as rendered to the user.
 type FactorRow struct {
-	Label   string
-	Value   string
-	Impact  string // "raises risk", "lowers risk", "neutral"
+	Label  string
+	Value  string
+	Impact string // "raises risk", "lowers risk", "neutral"
 }
 
 // Render produces a stable, presentation-ready slice of rows from a

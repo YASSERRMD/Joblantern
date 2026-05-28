@@ -6,20 +6,20 @@ import "time"
 
 // Row is one per-release measurement.
 type Row struct {
-	Release        string
-	CapturedAt     time.Time
-	JoulesPerVerdict float64
-	TokensPerVerdict int
+	Release            string
+	CapturedAt         time.Time
+	JoulesPerVerdict   float64
+	TokensPerVerdict   int
 	MCPCallsPerVerdict int
 	GramsCO2PerVerdict float64
 }
 
 // Regression is the per-axis tolerance.
 type Regression struct {
-	JoulesPctMax float64
-	TokensPctMax float64
+	JoulesPctMax   float64
+	TokensPctMax   float64
 	MCPCallsPctMax float64
-	CO2PctMax    float64
+	CO2PctMax      float64
 }
 
 // Default is the tolerance Joblantern publishes — small regressions

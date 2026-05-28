@@ -7,12 +7,12 @@ import "time"
 
 // Submission is the wire form of a bounty submission.
 type Submission struct {
-	ID            string
-	ReporterEmail string
-	Severity      string // "low", "medium", "high", "critical"
-	Title         string
-	Summary       string
-	ReceivedAt    time.Time
+	ID             string
+	ReporterEmail  string
+	Severity       string // "low", "medium", "high", "critical"
+	Title          string
+	Summary        string
+	ReceivedAt     time.Time
 	PgpFingerprint string
 }
 

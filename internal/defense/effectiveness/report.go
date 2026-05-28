@@ -27,13 +27,13 @@ type Row struct {
 
 // Summary is the monthly aggregate.
 type Summary struct {
-	Month     time.Month
-	Year      int
-	Total     int
-	Accepted  int
-	Rejected  int
-	Ignored   int
-	Respawned int
+	Month             time.Month
+	Year              int
+	Total             int
+	Accepted          int
+	Rejected          int
+	Ignored           int
+	Respawned         int
 	MedianHoursOnline int
 }
 

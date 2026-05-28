@@ -7,13 +7,13 @@ import "fmt"
 
 // Citation is the metadata that drives the landing page.
 type Citation struct {
-	DOI       string
-	Year      int
-	URL       string
-	Title     string
-	Bytes     int64
-	Records   int
-	SHA256    string
+	DOI     string
+	Year    int
+	URL     string
+	Title   string
+	Bytes   int64
+	Records int
+	SHA256  string
 }
 
 // BibTeX returns the BibTeX entry.

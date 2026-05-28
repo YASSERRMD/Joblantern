@@ -39,9 +39,9 @@ func Scan(s Submission) []Flag {
 
 // Submission is the rental input the rule pack consumes.
 type Submission struct {
-	DepositMethod              string
-	NoInPersonViewingOffered   bool
-	ReverseImageHits           int
-	RentBelowMarketRatio       float64
-	UrgencyPhrases             int
+	DepositMethod            string
+	NoInPersonViewingOffered bool
+	ReverseImageHits         int
+	RentBelowMarketRatio     float64
+	UrgencyPhrases           int
 }

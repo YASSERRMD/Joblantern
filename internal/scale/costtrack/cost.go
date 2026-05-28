@@ -7,11 +7,11 @@ import "time"
 
 // Sample is one measurement.
 type Sample struct {
-	VerdictID    string
-	At           time.Time
-	LLMCents     float64
-	MCPCents     float64
-	StorageCents float64
+	VerdictID      string
+	At             time.Time
+	LLMCents       float64
+	MCPCents       float64
+	StorageCents   float64
 	BandwidthCents float64
 }
 
@@ -22,9 +22,9 @@ func (s Sample) Total() float64 {
 
 // MonthlyRollup is the aggregate.
 type MonthlyRollup struct {
-	Month       time.Month
-	Year        int
+	Month        time.Month
+	Year         int
 	VerdictCount int
-	TotalCents  float64
-	MedianCents float64
+	TotalCents   float64
+	MedianCents  float64
 }

@@ -6,10 +6,10 @@ import "time"
 
 // Member is one alumni record.
 type Member struct {
-	ID          string
-	OperatorID  string
-	LeftAt      time.Time
-	Reason      string
+	ID            string
+	OperatorID    string
+	LeftAt        time.Time
+	Reason        string
 	StayConnected bool
 }
 

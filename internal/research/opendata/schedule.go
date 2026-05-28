@@ -5,9 +5,9 @@ import "time"
 
 // Release is one scheduled open-data release.
 type Release struct {
-	Cadence    string
-	Window     time.Duration
-	Format     string
+	Cadence string
+	Window  time.Duration
+	Format  string
 }
 
 // Defaults captures the schedule.

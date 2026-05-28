@@ -25,9 +25,9 @@ func Scrub(b []byte) {
 type Consent string
 
 const (
-	RetainNo            Consent = "no"
-	RetainResearchOnly  Consent = "research-only"
-	RetainImproveAgent  Consent = "improve-agent"
+	RetainNo           Consent = "no"
+	RetainResearchOnly Consent = "research-only"
+	RetainImproveAgent Consent = "improve-agent"
 )
 
 // PersistAllowed returns whether the supplied consent permits writing

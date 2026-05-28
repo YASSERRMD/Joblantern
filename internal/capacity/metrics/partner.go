@@ -7,12 +7,12 @@ import "time"
 
 // Snapshot is one per-partner measurement.
 type Snapshot struct {
-	PartnerID         string
-	At                time.Time
-	VerdictsLast30d   int
+	PartnerID          string
+	At                 time.Time
+	VerdictsLast30d    int
 	UniqueUsersLast30d int
-	UnresolvedAppeals int
-	MentorshipMinutes int
+	UnresolvedAppeals  int
+	MentorshipMinutes  int
 }
 
 // Healthy reports whether the partner is hitting the soft floors. A

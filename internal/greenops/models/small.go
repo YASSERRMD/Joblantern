@@ -5,8 +5,8 @@ package models
 
 // Choice is the policy for one stage.
 type Choice struct {
-	Stage   string
-	Primary string
+	Stage    string
+	Primary  string
 	Tiebreak string
 }
 

@@ -9,9 +9,9 @@ import "time"
 type Purpose string
 
 const (
-	PurposeVerdict     Purpose = "verdict-generation"
-	PurposeResearch    Purpose = "research-sharing"
-	PurposeRegulator   Purpose = "regulator-forwarding"
+	PurposeVerdict      Purpose = "verdict-generation"
+	PurposeResearch     Purpose = "research-sharing"
+	PurposeRegulator    Purpose = "regulator-forwarding"
 	PurposeImproveAgent Purpose = "improve-agent"
 )
 

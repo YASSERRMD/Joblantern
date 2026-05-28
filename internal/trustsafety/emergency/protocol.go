@@ -12,17 +12,17 @@ import (
 
 // Vote is one emergency vote.
 type Vote struct {
-	SeatID    string
-	CastAt    time.Time
-	Decision  string // "approve" / "deny"
+	SeatID   string
+	CastAt   time.Time
+	Decision string // "approve" / "deny"
 }
 
 // Action is the emergency case in progress.
 type Action struct {
-	ID        string
-	OpenedAt  time.Time
-	Votes     []Vote
-	Ratified  bool
+	ID         string
+	OpenedAt   time.Time
+	Votes      []Vote
+	Ratified   bool
 	Rolledback bool
 }
 

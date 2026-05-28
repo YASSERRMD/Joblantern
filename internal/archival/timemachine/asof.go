@@ -13,7 +13,7 @@ type Query struct {
 
 // Resolver maps an AsOf date to the storage paths that cover it.
 type Resolver struct {
-	AnnualArchives map[int]string // year -> archive URL
+	AnnualArchives map[int]string    // year -> archive URL
 	MonthlyDeltas  map[string]string // "2026-05" -> delta URL
 }
 

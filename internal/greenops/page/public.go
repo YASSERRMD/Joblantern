@@ -6,12 +6,12 @@ import "fmt"
 
 // Data is what the page expects.
 type Data struct {
-	Month                string
-	Verdicts             int
-	TotalGramsCO2        float64
-	PerVerdictGrams      float64
-	GreenSchedulerHours  int
-	BatchInLowCarbonPct  float64
+	Month               string
+	Verdicts            int
+	TotalGramsCO2       float64
+	PerVerdictGrams     float64
+	GreenSchedulerHours int
+	BatchInLowCarbonPct float64
 }
 
 // Render produces a deterministic HTML page.

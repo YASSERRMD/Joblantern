@@ -33,7 +33,7 @@ func python(baseURL string) string {
 	var b strings.Builder
 	b.WriteString("\"\"\"Joblantern research SDK (auto-generated).\"\"\"\n")
 	b.WriteString("import urllib.request, json\n\n")
-	b.WriteString(fmt.Sprintf("BASE = %q\n\n", baseURL))
+	fmt.Fprintf(&b, "BASE = %q\n\n", baseURL)
 	b.WriteString("class Client:\n")
 	b.WriteString("    def __init__(self, token=None):\n        self.token = token\n\n")
 	b.WriteString("    def _get(self, path, params=None):\n")
@@ -51,7 +51,7 @@ func rLang(baseURL string) string {
 	var b strings.Builder
 	b.WriteString("# Joblantern research SDK (auto-generated)\n")
 	b.WriteString("library(httr); library(jsonlite)\n\n")
-	b.WriteString(fmt.Sprintf("joblantern_base <- %q\n\n", baseURL))
+	fmt.Fprintf(&b, "joblantern_base <- %q\n\n", baseURL)
 	b.WriteString("joblantern_verdicts <- function(token=NULL, country=NULL, since=NULL, cursor=NULL) {\n")
 	b.WriteString("  q <- list(country=country, since=since, cursor=cursor)\n")
 	b.WriteString("  q <- q[!sapply(q, is.null)]\n")

@@ -22,7 +22,7 @@ type TransferDecision struct {
 
 // Check returns whether data from country j may flow to destination.
 // Same-region transfers are always allowed.
-func Check(j Jurisdiction, destinationRegion string) (TransferDecision, error) {
+func Check(_ Jurisdiction, destinationRegion string) (TransferDecision, error) {
 	if destinationRegion == "" {
 		return TransferDecision{}, errors.New("destination region required")
 	}

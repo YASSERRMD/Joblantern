@@ -28,12 +28,19 @@ var known = []Registry{
 	{ID: "in-ugc", Country: "IN", Name: "University Grants Commission", BaseURL: "https://www.ugc.gov.in"},
 }
 
-// canonical normalises an institution name for fuzzy matching.
+// canonical normalises an institution name for fuzzy matching against
+// registry entries.
 func canonical(s string) string {
 	return strings.ToLower(strings.Join(strings.Fields(s), " "))
 }
 
 func main() {
-	slog.New(slog.NewJSONHandler(os.Stderr, nil)).Info("mcp-accreditation starting", "registries", len(known))
+	log := slog.New(slog.NewJSONHandler(os.Stderr, nil))
+	// Pre-canonicalise registry names so lookups are O(1) once tools land.
+	index := make(map[string]Registry, len(known))
+	for _, r := range known {
+		index[canonical(r.Name)] = r
+	}
+	log.Info("mcp-accreditation starting", "registries", len(index))
 	// MCP server boilerplate follows the established pattern.
 }

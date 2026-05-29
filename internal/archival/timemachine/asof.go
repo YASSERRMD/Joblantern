@@ -3,7 +3,10 @@
 // monthly snapshots that follow it.
 package timemachine
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 // Query is the user-facing input.
 type Query struct {
@@ -37,24 +40,5 @@ func (r Resolver) Locate(q Query) []string {
 }
 
 func monthKey(year int, m time.Month) string {
-	mm := int(m)
-	mmStr := "0" + string('0'+byte(mm))
-	if mm >= 10 {
-		mmStr = string('0'+byte(mm/10)) + string('0'+byte(mm%10))
-	}
-	return itoa(year) + "-" + mmStr
-}
-
-func itoa(n int) string {
-	if n == 0 {
-		return "0"
-	}
-	var b [12]byte
-	i := len(b)
-	for n > 0 {
-		i--
-		b[i] = byte('0' + n%10)
-		n /= 10
-	}
-	return string(b[i:])
+	return fmt.Sprintf("%d-%02d", year, int(m))
 }

@@ -40,7 +40,15 @@ func validateURL(raw string) (string, error) {
 
 func main() {
 	logger := slog.New(slog.NewJSONHandler(os.Stderr, nil))
-	logger.Info("mcp-rental-listings starting")
+	logger.Info("mcp-rental-listings starting", "result_type", fmt.Sprintf("%T", listing{}))
+	// Validate the configured aggregator base URL early so a
+	// misconfiguration fails fast at boot rather than at first call.
+	if base := os.Getenv("RENTAL_AGGREGATOR_URL"); base != "" {
+		if _, err := validateURL(base); err != nil {
+			logger.Error("invalid RENTAL_AGGREGATOR_URL", "err", err)
+			os.Exit(1)
+		}
+	}
 	// The MCP server boilerplate (stdio, tool registration) follows
 	// the same template as the other Joblantern MCP servers and is
 	// wired in a subsequent commit alongside the rental rule pack.

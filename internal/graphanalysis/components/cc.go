@@ -13,8 +13,7 @@ func Find(nodes []string, edges []Edge) [][]string {
 	for _, n := range nodes {
 		parent[n] = n
 	}
-	var find func(string) string
-	find = func(x string) string {
+	find := func(x string) string {
 		for parent[x] != x {
 			parent[x] = parent[parent[x]]
 			x = parent[x]

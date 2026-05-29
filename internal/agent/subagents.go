@@ -17,15 +17,15 @@ type ClientFn func(ctx context.Context, server string) (*mcpclient.Client, error
 // wired in the binary's main.go and share this struct.
 type MCPSubagent struct {
 	NameStr string
-	Run_    func(ctx context.Context, sub Submission) []Fact
+	RunFn   func(ctx context.Context, sub Submission) []Fact
 }
 
 func (m *MCPSubagent) Name() string                                   { return m.NameStr }
-func (m *MCPSubagent) Run(ctx context.Context, sub Submission) []Fact { return m.Run_(ctx, sub) }
+func (m *MCPSubagent) Run(ctx context.Context, sub Submission) []Fact { return m.RunFn(ctx, sub) }
 
-// runParallel is a convenience helper sub-agents use to call multiple
+// RunParallel is a convenience helper sub-agents use to call multiple
 // MCP tools concurrently and append their results.
-func runParallel(funcs ...func() []Fact) []Fact {
+func RunParallel(funcs ...func() []Fact) []Fact {
 	var (
 		mu  sync.Mutex
 		out []Fact

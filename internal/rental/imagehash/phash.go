@@ -8,6 +8,7 @@ import (
 	"image"
 	"image/color"
 	"image/draw"
+
 	// Side-effect imports for image format decoding.
 	_ "image/jpeg"
 	_ "image/png"

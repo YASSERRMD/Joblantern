@@ -22,7 +22,7 @@ type Listing struct {
 
 // Defaults returns the seed list. Production generators expand from
 // templates per origin country and industry.
-func Defaults(now time.Time) []Listing {
+func Defaults(_ time.Time) []Listing {
 	return []Listing{
 		{ID: "syn-1", Title: "URGENT Driver wanted Dubai", Body: "Pay AED 18000/mo. Apply via WhatsApp now.", Country: "AE", Industry: "transport", Phone: "+971-55-555-1111", GroundTruth: "scam"},
 		{ID: "syn-2", Title: "Nurse, KSA — bring passport copy", Body: "No interview needed. Visa on arrival.", Country: "SA", Industry: "health", GroundTruth: "scam"},

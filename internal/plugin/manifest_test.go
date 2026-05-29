@@ -7,8 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/yasserrmd/joblantern/internal/plugin"
 	"gopkg.in/yaml.v3"
+
+	"github.com/yasserrmd/joblantern/internal/plugin"
 )
 
 func TestLoadManifest_OK(t *testing.T) {

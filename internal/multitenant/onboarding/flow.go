@@ -30,7 +30,7 @@ const (
 // Required returns the KYC level for the country. NGO-led signups in
 // permissive jurisdictions only need a lite verification; commercial
 // recruiters always need full KYC.
-func Required(country, role string) KYC {
+func Required(_, role string) KYC {
 	if strings.EqualFold(role, "commercial-recruiter") {
 		return KYCFull
 	}

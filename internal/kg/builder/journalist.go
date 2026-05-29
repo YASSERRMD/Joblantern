@@ -3,7 +3,7 @@
 // lets the user fill in country/industry/date filters.
 package builder
 
-import "fmt"
+import "strings"
 
 // Starter is one pre-built query.
 type Starter struct {
@@ -45,36 +45,7 @@ SELECT ?a ?b ?phone WHERE {
 func Fill(s Starter, args map[string]string) string {
 	out := s.Query
 	for k, v := range args {
-		out = replace(out, "{"+k+"}", v)
+		out = strings.ReplaceAll(out, "{"+k+"}", v)
 	}
 	return out
 }
-
-func replace(s, old, new string) string {
-	if old == "" {
-		return s
-	}
-	out := ""
-	for {
-		i := indexOf(s, old)
-		if i < 0 {
-			return out + s
-		}
-		out += s[:i] + new
-		s = s[i+len(old):]
-	}
-}
-
-func indexOf(s, sub string) int {
-	if len(sub) == 0 {
-		return 0
-	}
-	for i := 0; i+len(sub) <= len(s); i++ {
-		if s[i:i+len(sub)] == sub {
-			return i
-		}
-	}
-	return -1
-}
-
-func ensureFmt() string { return fmt.Sprintf("%s", "") }

@@ -24,4 +24,4 @@ type Heuristic struct{}
 
 // Parse returns an empty profile. The agent treats an empty profile
 // as "no personalisation requested".
-func (Heuristic) Parse(raw []byte, ct string) (Profile, error) { return Profile{}, nil }
+func (Heuristic) Parse(_ []byte, _ string) (Profile, error) { return Profile{}, nil }

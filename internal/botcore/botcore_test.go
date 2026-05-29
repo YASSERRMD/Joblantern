@@ -52,7 +52,8 @@ func TestAPI_VerifyAndWait(t *testing.T) {
 
 func TestRateLimiter(t *testing.T) {
 	rl := botcore.NewRateLimiter(2, time.Minute)
-	if !rl.Allow("a") || !rl.Allow("a") {
+	first, second := rl.Allow("a"), rl.Allow("a")
+	if !first || !second {
 		t.Fatal("first two should pass")
 	}
 	if rl.Allow("a") {

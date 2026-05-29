@@ -9,7 +9,7 @@ import (
 )
 
 func TestRejectsEmptyQuery(t *testing.T) {
-	srv := httptest.NewServer(Endpoint{Execute: func(q string) ([]map[string]string, error) { return nil, nil }})
+	srv := httptest.NewServer(Endpoint{Execute: func(_ string) ([]map[string]string, error) { return nil, nil }})
 	defer srv.Close()
 	resp, _ := http.Get(srv.URL)
 	if resp.StatusCode != http.StatusBadRequest {
@@ -18,7 +18,7 @@ func TestRejectsEmptyQuery(t *testing.T) {
 }
 
 func TestStableSelectShape(t *testing.T) {
-	srv := httptest.NewServer(Endpoint{Execute: func(q string) ([]map[string]string, error) {
+	srv := httptest.NewServer(Endpoint{Execute: func(_ string) ([]map[string]string, error) {
 		return []map[string]string{{"company": "ex:c1", "industry": "transport"}}, nil
 	}})
 	defer srv.Close()

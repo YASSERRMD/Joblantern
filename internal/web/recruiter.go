@@ -139,9 +139,10 @@ func (b *BadgeIssuer) svg(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	colour := "#3da76a"
-	if c.Risk == "yellow" {
+	switch c.Risk {
+	case "yellow":
 		colour = "#d6a23a"
-	} else if c.Risk == "red" {
+	case "red":
 		colour = "#d6452a"
 	}
 	w.Header().Set("Content-Type", "image/svg+xml")

@@ -175,7 +175,7 @@ func buildBuiltinSubagents() ([]agent.Subagent, error) {
 	return []agent.Subagent{
 		&agent.MCPSubagent{
 			NameStr: "pattern",
-			Run_: func(_ context.Context, sub agent.Submission) []agent.Fact {
+			RunFn: func(_ context.Context, sub agent.Submission) []agent.Fact {
 				if sub.ListingText == "" {
 					return nil
 				}
@@ -202,7 +202,7 @@ func buildBuiltinSubagents() ([]agent.Subagent, error) {
 		},
 		&agent.MCPSubagent{
 			NameStr: "language",
-			Run_: func(_ context.Context, sub agent.Submission) []agent.Fact {
+			RunFn: func(_ context.Context, sub agent.Submission) []agent.Fact {
 				if sub.ListingText == "" || sub.Jurisdiction == "" {
 					return nil
 				}
@@ -231,7 +231,7 @@ func buildAddressSubagent() agent.Subagent {
 	url := os.Getenv("MCP_ADDRESS_URL")
 	return &agent.MCPSubagent{
 		NameStr: "address",
-		Run_: func(ctx context.Context, sub agent.Submission) []agent.Fact {
+		RunFn: func(ctx context.Context, sub agent.Submission) []agent.Fact {
 			if url == "" || sub.ClaimedAddress == "" {
 				return nil
 			}

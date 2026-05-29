@@ -39,7 +39,7 @@ func Handler(t *template.Template, page Page) http.Handler {
 	if t == nil {
 		t = template.Must(template.New("kiosk").Parse(kioskHTML))
 	}
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		_ = t.Execute(w, page)
 	})

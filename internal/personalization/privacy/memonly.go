@@ -8,16 +8,21 @@ package privacy
 
 import "sync"
 
-// Pool reuses byte slices so we can scrub them deterministically when
-// they leave scope.
-var Pool = sync.Pool{New: func() any { return make([]byte, 0, 4096) }}
+// Pool reuses byte-slice buffers so we can scrub them deterministically
+// when they leave scope. Buffers are stored by pointer so returning one
+// to the pool does not allocate.
+var Pool = sync.Pool{New: func() any { b := make([]byte, 0, 4096); return &b }}
 
-// Scrub overwrites the slice with zeros and returns it to the pool.
-func Scrub(b []byte) {
-	for i := range b {
-		b[i] = 0
+// Scrub overwrites the buffer with zeros and returns it to the pool.
+func Scrub(b *[]byte) {
+	if b == nil {
+		return
 	}
-	b = b[:0]
+	s := *b
+	for i := range s {
+		s[i] = 0
+	}
+	*b = s[:0]
 	Pool.Put(b)
 }
 

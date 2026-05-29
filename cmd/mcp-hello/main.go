@@ -98,7 +98,7 @@ func runStdio() error {
 	if err != nil {
 		return err
 	}
-	session.Wait()
+	_ = session.Wait()
 	return nil
 }
 

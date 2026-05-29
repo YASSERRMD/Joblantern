@@ -38,10 +38,7 @@ func GraphML(w io.Writer, nodes []Node, edges []Edge) error {
 	inner += `</graph>`
 	enc := xml.NewEncoder(w)
 	enc.Indent("", "  ")
-	if err := enc.Encode(ml{Body: inner}); err != nil {
-		return err
-	}
-	return nil
+	return enc.Encode(ml{Body: inner})
 }
 
 // Gephi writes a CSV-edge-list that gephi imports cleanly.

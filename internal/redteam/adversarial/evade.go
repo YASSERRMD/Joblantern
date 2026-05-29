@@ -31,7 +31,9 @@ func (HomographSwap) Mutate(body string) string {
 type WhitespaceInject struct{}
 
 func (WhitespaceInject) Mutate(body string) string {
-	return strings.ReplaceAll(body, "WhatsApp", "What​sApp")
+	// Insert a zero-width space (U+200B) inside the trigger word so
+	// naive substring matching misses it.
+	return strings.ReplaceAll(body, "WhatsApp", "What\u200bsApp")
 }
 
 // All returns the canonical mutator chain.

@@ -40,6 +40,7 @@ cites its source, and every verdict is reproducible.
   <img src="docs/assets/architecture.png" alt="Joblantern verification pipeline architecture" width="100%">
 </p>
 
+
 | Stage | What happens |
 |-------|--------------|
 | **Submit** | A URL, pasted recruiter message, or offer letter, via web, kiosk, bot, or REST/GraphQL API. |
